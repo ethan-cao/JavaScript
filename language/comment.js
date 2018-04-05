@@ -1,0 +1,7 @@
+		
+// Class
+
+
+// Method
+
+ * @return {string}
