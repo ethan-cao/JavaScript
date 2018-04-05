@@ -1,0 +1,41 @@
+{
+	"manifest_version" : 2,
+
+	"name" : "QuickFiller",
+	"description" : "Fill form quickly.",
+	"version" : "1.0",
+	"author" : "ethancaocgx@gmail.com",
+
+	"browser_action": {
+		"default_icon" : "resource/pen.png",
+		"default_popup" : "popup.html"
+	},
+
+	"background": {
+		"persistent": false,
+		"scripts": [
+			"lib/jquery-3.3.1.min.js",
+			"lib/lodash.js",
+			"lib/backbone-min.js",
+			"background.js"
+		]
+	},
+
+	"content_scripts" : [{
+		"all_frames" : true,
+		"matches" : ["*://*/*prweb*"],
+		"js" : [
+			"lib/jquery-3.3.1.min.js",
+			"lib/lodash.js",
+			"content.js"
+		]
+	}],
+
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+	"permissions" : [
+		"tabs",
+		"activeTab",
+		"storage"
+	]
+}
