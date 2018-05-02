@@ -11,5 +11,3 @@ var TodoView = Backbone.View.extend({
         return this;
     }
 });
-
-
