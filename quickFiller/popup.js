@@ -48,7 +48,6 @@
 		},
 
 		// edit: function(){
-
 		// },
 
 		// close : function(){
@@ -62,7 +61,6 @@
 		// },
 
 		// revertOnEscape : function(){
-			
 		// },
 
 		clickDefine : function(){
