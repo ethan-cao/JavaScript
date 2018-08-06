@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import reduxThunk from "redux-thunk";  
@@ -13,8 +12,9 @@ const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 window.store = store;
 
 ReactDOM.render(
-    <Provider>
+    <Provider store={store}>
         <App/>
     </Provider>, 
-    document.querySelector('root')
+    document.querySelector('#root')
+    // #root element is defined in ./public/index.html
 );
