@@ -9,6 +9,7 @@ import reducers from "./reducers";
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
+// debug purpose only
 window.store = store;
 
 ReactDOM.render(
