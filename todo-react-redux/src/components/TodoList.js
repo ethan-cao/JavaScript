@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import Todo from "./Todo";
+import {connect} from "react-redux";
 
-export default class TodoList extends Component {
+class TodoList extends Component {
     componentDidMount(){
     }
     
@@ -9,11 +10,19 @@ export default class TodoList extends Component {
         return (
             <div id="todoList">
                 <ul>
-                    {/* {this.props.todos.map( 
-                        todo => <Todo title={todo.title}/>
-                    )} */}
+                    {this.props.todos.map( 
+                        (todo, index) => <Todo key={index} title={todo}/>
+                    )}
                 </ul>    
             </div>
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        todos: state.todo
+    }
+}
+
+export default connect(mapStateToProps)(TodoList);
