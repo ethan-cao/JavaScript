@@ -8,11 +8,17 @@ export default class TODO extends Component {
             title : "",
             isDone : false
         }
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
+    handleClick(){
+
+    }
+    
     render(){
         return (
-            <div>{this.props.title}</div>
+            <li onClick={this.handleClick}>{this.props.title}</li>
         );
     }
 }
