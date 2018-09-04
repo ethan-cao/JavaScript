@@ -6,7 +6,7 @@ class Header extends React.Component{
     constructor(props){
         super(props);
 
-        this.state = {newTodo:"newTodo"};
+        this.state = {newTodo:""};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleAddTodo = this.handleAddTodo.bind(this);
@@ -18,6 +18,13 @@ class Header extends React.Component{
 
     handleAddTodo(event){
         event.preventDefault();
+
+        if (this.state.newTodo === ""){
+            return;
+        }
+
+        // TODO check if it existed
+
         this.props.addTodo(this.state.newTodo);
     }
 
@@ -33,4 +40,8 @@ class Header extends React.Component{
     }
 }
 
-export default connect(null,actions)(Header);
+// use connect() so this.props has access to action
+export default connect(null, actions)(Header);
+
+// just call connect(), this.props.dispatch is accessible,   this.props.dispatch === store.dispatch // true
+// export default connect()(Header);

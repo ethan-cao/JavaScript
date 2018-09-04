@@ -1,4 +1,4 @@
-import {ADD, REMOVE} from '../actions/index';
+import {ADD, REMOVE, TOGGLE} from '../actions/index';
 
 const todoReducer = (state=[], action) => {
     switch(action.type){
@@ -6,6 +6,9 @@ const todoReducer = (state=[], action) => {
             return [...state, action.payload];
         case REMOVE :
             return state.splice(action.payload, 1);
+        case TOGGLE :
+
+            return state;
         default :return state;
     }
 }

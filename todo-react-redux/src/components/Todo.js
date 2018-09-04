@@ -1,24 +1,12 @@
 import React, {Component} from "react"
 
+/**
+ * The presentational component is only responsible for displaying data
+ */
 export default class TODO extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            title : "",
-            isDone : false
-        }
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(){
-
-    }
-    
     render(){
         return (
-            <li onClick={this.handleClick}>{this.props.title}</li>
+            <li onClick={this.props.onClick}>{this.props.title}</li>
         );
     }
 }
