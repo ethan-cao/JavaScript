@@ -4,10 +4,13 @@ export const ADD = "add todo";
 export const REMOVE = "remove todo";
 export const TOGGLE = "toggle todo";
 
+let todoId = 0;
+
 export const addTodo = (todo) => {
     return {
         type : ADD,
-        payload :  todo
+        title: todo,
+        id: ++todoId
     }
 };
 
@@ -18,9 +21,9 @@ export const removeTodo = (todoIndex) => {
     }
 }
 
-export const toggle = (x) => {
-    return {
+export const toggle = id => (
+    {
         type : TOGGLE,
-        payload  :1
+        id
     }
-}
+);
