@@ -14,10 +14,10 @@ export const addTodo = (todo) => {
     }
 };
 
-export const removeTodo = (todoIndex) => {
+export const remove = (id) => {
     return {
         type : REMOVE,
-        payload : todoIndex    
+        id
     }
 }
 

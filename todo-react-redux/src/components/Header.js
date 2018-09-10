@@ -13,7 +13,7 @@ class Header extends React.Component{
     }
 
     handleChange(event) {
-        this.setState({newTodo: event.target.value})        
+        this.setState({newTodo: event.target.value});
     }
 
     handleAddTodo(event){
@@ -23,9 +23,9 @@ class Header extends React.Component{
             return;
         }
 
-        // TODO check if it existed
-
         this.props.addTodo(this.state.newTodo);
+
+        this.setState({newTodo: ""});
     }
 
     render() {

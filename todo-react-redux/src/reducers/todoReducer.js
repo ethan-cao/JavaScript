@@ -5,13 +5,12 @@ const todoReducer = (state=[], action) => {
         case ADD : 
             return [...state, {id : action.id, title: action.title, isDone:false}];
         case REMOVE :
-            return state.splice(action.payload, 1);
+            return state.filter( todo => todo.id !== action.id);
         case TOGGLE :
-            const tobeUpdated = state.find(todo => todo.id === action.id);
-            if (tobeUpdated){
-                tobeUpdated.isDone = !tobeUpdated.isDone;
-            }
-            return state;
+            // Change data: must return a new object, only update a property does not trigger re-rendering
+            return state.map(todo => 
+                todo.id === action.id ? {...todo, isDone:!todo.isDone} : todo
+            );
         default :return state;
     }
 }
