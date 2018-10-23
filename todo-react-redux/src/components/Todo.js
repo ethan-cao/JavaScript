@@ -6,9 +6,16 @@ import React, {Component} from "react"
 export default class TODO extends Component {
     render(){
         return (
-            <li onClick={this.props.toggle} style={ {textDecoration: this.props.isDone? 'line-through' : 'none' }}>
+            <li 
+                onClick={this.props.toggle} 
+                style={ {textDecoration: this.props.isDone? 'line-through' : 'none' }}
+            >
                 {this.props.title}
-                <button onClick={this.props.remove}>Remove</button>
+                <button 
+                    onClick={this.props.remove}
+                >
+                    Remove
+                </button>
             </li>
         );
     }

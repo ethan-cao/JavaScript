@@ -1,0 +1,36 @@
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from "../actions";
+import TodoList from '../components/TodoList';
+
+const getVisibleTodos = (todos, filter) => {
+    switch(filter){
+        case actions.VisibilityFilters.SHOW_ALL:
+            return todos;
+        case actions.VisibilityFilters.SHOW_COMPLETED :
+            return todos.filter( todo => todo.isDone);
+        case actions.VisibilityFilters.SHOW_ACTIVE:
+            return todos.filter( todo => !todo.isDone);
+        default:
+            // throw new Error("Unknown filter : " + filter);
+    }
+}
+
+//this component will subscribe to Redux store updates. 
+//when the store is updated (state has updated value) mapStateToProps will be called.
+// mapStateToProps returns a plain object, which will be merged into the component’s props.
+// state.todo, key "todo" is set by reducers/index.js
+const mapStateToProps = state => ({
+    todos: getVisibleTodos(state.todos, state.visibilityFilters)
+});
+
+// https://gist.github.com/markerikson/6c7608eee5d2421966d3df5edbb8f05c
+const mapDispatchToProps = dispatch => (
+    // bindActionCreator make the action creator be able to be invoked directly
+    bindActionCreators({toggle: actions.toggle, remove: actions.remove}, dispatch)
+);
+
+// https://github.com/reduxjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
+// use connect() so this.props has access to action toggle
+// alternatively, check Header mapDispatchToProps
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

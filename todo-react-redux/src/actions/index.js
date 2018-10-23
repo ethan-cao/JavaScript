@@ -3,6 +3,13 @@
 export const ADD = "add todo";
 export const REMOVE = "remove todo";
 export const TOGGLE = "toggle todo";
+export const SET_FILTER = "set filter";
+export const VisibilityFilters = {
+    SHOW_ALL : "SHOW_ALL",
+    SHOW_COMPLETED : "SHOW_COMPLETED",
+    SHOW_ACTIVE : "SHOW_ACTIVE"
+}
+
 
 let todoId = 0;
 
@@ -27,3 +34,10 @@ export const toggle = id => (
         id
     }
 );
+
+export const setVisibilityFilter = filter => {
+    return {
+        type: SET_FILTER,
+        filter
+    }
+}
