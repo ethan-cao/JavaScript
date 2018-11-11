@@ -11,7 +11,6 @@ export const VisibilityFilters = {
     SHOW_ACTIVE : "SHOW_ACTIVE"
 }
 
-
 let todoId = 0;
 
 export const addTodo = (todo) => {
