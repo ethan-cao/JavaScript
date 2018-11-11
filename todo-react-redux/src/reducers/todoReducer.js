@@ -12,8 +12,6 @@ const todoReducer = (state=[], action) => {
             return state.map(todo => 
                 todo.id === action.id ? {...todo, isDone:!todo.isDone} : todo
             );
-        case actions.SET_FILTER:
-            return action.filter
         default :
             return state;
     }
