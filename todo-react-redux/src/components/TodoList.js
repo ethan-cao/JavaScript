@@ -2,11 +2,11 @@ import React from "react";
 import Todo from "./Todo";
 
 /**
- * The container component is responsible for
- *  1. Prepare data to be displayed
+ * The presentational component is responsible for
+ *  1. display data 
  *  2. handle event
  */
-export default class TodoContainer extends React.Component {
+export default class TodoList extends React.Component {
     render() {
         // extract toggle value from this.props, results in  toogle = this.props.toggle, remove = this.props.remove
         const {toggle, remove} = this.props;  
@@ -28,6 +28,6 @@ export default class TodoContainer extends React.Component {
     }
 }
 
-TodoContainer.defaultProps = {
+TodoList.defaultProps = {
     todos : []
 }
