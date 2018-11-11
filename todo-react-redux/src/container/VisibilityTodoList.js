@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import * as actions from "../actions";
+import {bindActionCreators} from 'redux';
 import TodoList from '../components/TodoList';
 
 const getVisibleTodos = (todos, filter) => {
@@ -20,9 +20,9 @@ const getVisibleTodos = (todos, filter) => {
 //when the store is updated (state has updated value) mapStateToProps will be called.
 // mapStateToProps returns a plain object, which will be merged into the component’s props.
 // state.todo, key "todo" is set by reducers/index.js
-const mapStateToProps = state => ({
-    todos: getVisibleTodos(state.todos, state.visibilityFilters)
-});
+const mapStateToProps = state => {
+    return { todos: getVisibleTodos(state.todo, state.visibilityfilter) }
+}
 
 // https://gist.github.com/markerikson/6c7608eee5d2421966d3df5edbb8f05c
 const mapDispatchToProps = dispatch => (

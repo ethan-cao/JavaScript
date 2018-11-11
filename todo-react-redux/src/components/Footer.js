@@ -1,8 +1,8 @@
 import React from "react";
-import {VisibilityFilters} from "../actions";
 import FilterLink from "../container/FilterLink";
+import {VisibilityFilters} from "../actions";
 
-const FilterContainer = () => (
+const Footer = () => (
     < div>
         <span > Show: </span> 
 
@@ -11,7 +11,7 @@ const FilterContainer = () => (
         </FilterLink> 
         
         <FilterLink filter = {VisibilityFilters.SHOW_ACTIVE} >
-        Active 
+        Active
         </FilterLink> 
         
         <FilterLink filter = {VisibilityFilters.SHOW_COMPLETED } >
@@ -20,4 +20,4 @@ const FilterContainer = () => (
     </div>
 );
 
-export default FilterContainer;
+export default Footer;
