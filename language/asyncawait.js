@@ -51,15 +51,18 @@ function addString(previous, current) {
     });
 }
 
+// async” before a function means : a function always returns a promise.
+// If the return s <non-promise>, then it is automatically wrapped into a resolved promise with that value.
 async function addAll(){
     let result = "";
     try{
+        // await works only inside async functions 
+        // await pauses async function execution until a Promise is resolved (fulfilled/rejected)
         result = await addString(result, "A");
         result = await addString(result, "B");
         result = await addString(result, "C");
-        // without await result refers to a promise object (rather than the resolved value)
+        // without await, result refers to a promise object (rather than the resolved value)
     } catch(e){
-        
     }
 
     console.log(result);
