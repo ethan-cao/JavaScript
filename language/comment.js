@@ -3,5 +3,3 @@
 
 
 // Method
-
- * @return {string}
