@@ -9,6 +9,7 @@ Array.prototype.arrCustom = function() {};
 let iterable = [3, 5, 7];
 iterable.foo = 'hello';
 
+// for...in is built for iterating object properties, not recommended for use with arrays
 for (let i in iterable) {
   console.log(i); // logs 0, 1, 2, "foo", "arrCustom", "objCustom"
 }
@@ -22,3 +23,5 @@ for (let i in iterable) {
 for (let i of iterable) {
   console.log(i); // logs 3, 5, 7
 }
+
+// Check Generator.js
