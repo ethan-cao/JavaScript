@@ -9,4 +9,3 @@ console.log("before : " + a + " - " + b);
 [ b, a ] = [ a, b ];  // exchange value of a and b
 console.log("after: " + a + " - " + b);
 // a = 3, b = 1
-
