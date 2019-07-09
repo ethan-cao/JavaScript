@@ -16,6 +16,7 @@ for (let key of set.values()) {
 console.log("WeakSet test\n");
 /* WeakSet is collections of objects only
    If there is no other reference to an object stored in the WeakSet, they can be garbage collected.
+    not iterable
 */
 
 
@@ -37,7 +38,9 @@ for (let [k, v] of map.entries())
     console.log(k.toString() + " : " + v);
 
 /*
- WeakMap is a map  where the keys are object,  Symbol can't be a WeakMap key
+ WeakMap is a map  where the keys must be object,  Symbol can't be a WeakMap key
+ not iterable
+
  and weak reference to keys - if there is no other reference to the object key, 
  when the key gets garbage collected so do the values.
 */
