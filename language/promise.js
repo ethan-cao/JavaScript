@@ -17,6 +17,9 @@ If a promise has succeeded or failed and you later add a success/failure callbac
 the correct callback will be called, even though the event took place earlier.
 
 promise caches the result, and will give the same result next time.
+
+Promise object is immutable
+
 */
 
 
@@ -60,3 +63,7 @@ delay(2000)
   }).then(() => {
     console.log('Done.');
   });
+
+
+
+

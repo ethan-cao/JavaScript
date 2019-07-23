@@ -1,3 +1,13 @@
+const o = {
+    a: 1,
+    b: 2,
+    c: 3
+}
+
+// Destructuring, define variable a, b,c and their value equals to value that has the same key in object o;
+const {a, b, c} = o;
+// a = 1,  b = 2, c = 3;
+
 var x = 0;
 var f = x => x;
 
@@ -40,3 +50,4 @@ dest.quux === 0
 dest.foo  === 3;
 dest.bar  === 2;
 dest.baz  === 4;
+

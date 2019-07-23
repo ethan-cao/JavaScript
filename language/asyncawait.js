@@ -43,6 +43,15 @@ function addAll(){
 
 addAll();
 
+/**
+ The async function declaration defines an asynchronous function, which returns an AsyncFunction object
+ 
+ An asynchronous function operates asynchronously via the event loop, using an implicit Promise to return its result
+ 
+ Async/await is actually just syntax sugar built on top of promises.
+ Async/await makes asynchronous code look and behave like synchronous code. This is where all its power lies.
+ */
+
 
 // Await version
 function addString(previous, current) {
