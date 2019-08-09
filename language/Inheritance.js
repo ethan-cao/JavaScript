@@ -1,4 +1,4 @@
-/ mutate the child, separate prototype chain
+// mutate the child, separate prototype chain
 var extend1 = (function() {
     // Create Surrogate only once
     var Surrogate = function() {};
@@ -63,3 +63,27 @@ var extend3 = (function() {
         return derivedChild;
     };
 })();
+
+var extend4 = (function(){
+    // create surrogate only once
+    var Surrogate = function(){};
+
+    return function(child, parent, protoProps, staticProps){
+        if (staticProps){
+            _.extend(child, parent, staticProps);
+        }
+
+        Surrogate.prototype = parent.prototype;
+        child.prototype = new Surrogate();
+        child.prototype.constructor = child;
+
+        if (protoProps){
+            _.extend(child.prototype, protoProps);
+        }
+
+        // set a convenience property 
+        child.superclass = parent.prototype
+        
+        return this;
+    }
+});
