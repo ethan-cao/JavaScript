@@ -12,7 +12,9 @@ class Shape{
 }
 
 class Rectangle extends Shape{
-    // static member
+    static name = "Rectangle";
+
+    // static method 
     static defaultRectangle  () {
         return new Rectangle("default", 0, 0, 100, 100);
     }
@@ -29,3 +31,5 @@ class Rectangle extends Shape{
         super.move(newX, newY);
     }
 }
+
+Rectangle.staticFiled = 1 ;
