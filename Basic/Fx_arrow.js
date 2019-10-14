@@ -13,7 +13,7 @@ console.log((f2(1))) // 3
 // Lexical this
 this.name = "ethan";
 let f3 = x => {
-        // arrows share the same lexical this as their surrounding code
+        // arrows function share the same lexical this in its surrounding code
         console.log(this.name);  // name
         return x;
      };

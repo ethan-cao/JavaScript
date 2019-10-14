@@ -1,0 +1,7 @@
+.selector-test>p::before{
+    content: " beofre + ";
+}
+
+.selector-test>p::after {
+    content: " + after";
+}
