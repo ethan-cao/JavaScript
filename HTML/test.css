@@ -5,3 +5,14 @@
 .selector-test>p::after {
     content: " + after";
 }
+.selector-test>p {
+    border: solid green;
+}
+
+.selector-test>p::first-letter{
+    font-size: 200%;
+}
+
+::selection {
+    background-color: cyan;
+}

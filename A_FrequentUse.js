@@ -37,6 +37,11 @@ const charArray = Array.from("char"); // ["c", "h", "a", "r"]
 // create array from every arguments
 newNums = Array.of(1, 2, 3, 4, 5, 6);  //  [1, 2, 3, 4, 5, 6]
 
+//concatenate array
+arr1.concat(arr2).concat(arr3);
+
+
+
 
 /** String */
 const s = "test_text";
@@ -50,8 +55,18 @@ for (const char of s) {
 s.includes("te"); //true
 s.split("_");  // ["test", "text"]
 
+//cut last 2 char:
+id.substring(0, id.length - 2);
+
+
+
+
 
 /** Set */
+
+
+
+
 
 
 /** jQuery */
@@ -72,4 +87,9 @@ $rows.each(function(idx, rowElem) {
   console.log(idx, " : ", rowElem);
   console.log(this === rowElem); //true, this refers to rowElem
 });
+
+
+/** Object */
+//count object property number
+_.keys(object).length;
 
