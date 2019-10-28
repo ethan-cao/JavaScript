@@ -1,87 +1,66 @@
 // Callback version
-function addString(previous, current, callback){
-    setTimeout(
-      () => {
-        callback((previous + ' ' + current))
-      }, 
-      1000
-    )
-  }
+function addString1(previous, current, callback){
+    setTimeout( () => callback((previous + ' ' + current)), 1000);
+}
 
-  function addAll(){
-      addString("", "A", result => {
-          addString(result, "B", result => {
-              addString(result, "C", result => {
-                  console.log(result);   // Prints out " A B C"
-              })
-          })
-      });
-  }
+function addAll1(){
+    addString1("", "A", result => {
+        addString1(result, "B", result => {
+            addString1(result, "C", result => {
+                console.log(result);   // Prints out " A B C"
+            })
+        })
+    });
+}
 
-addAll();
+// addAll1();
 
 
 // Promise version
-function addString(previous, current) {
-    return new Promise((resolve, reject) => {
-        setTimeout( () => {resolve(previous + '' + current)}, 1000)
-    });
-}
+const addString2 = (previous, current) => new Promise(resolve => setTimeout( resolve(previous + ' ' + current), 1000));
 
-function addAll(){
-    addString("", "A")
-    .then(result => {    // 1st parameter is resolve function, 2nd parameter us reject function
-        return addString(result, "B");
-    })
-    .then(result => {
-        return addString(result,  "C")
-    })
-    .then(result => {
-        console.log(result); // Prints out " A B C"
-    });
-}
+const addAll2 = () =>  addString2("", "A")
+                        .then(result => {    
+                            return addString2(result, "B");
+                        })
+                        .then(result => {
+                            return addString2(result,  "C")
+                        })
+                        .then(result => {
+                            console.log(result); // A B C
+                        });
+// addAll2();
 
-addAll();
 
-/**
- The async function declaration defines an asynchronous function, which returns an AsyncFunction object
- 
- An asynchronous function operates asynchronously via the event loop, using an implicit Promise to return its result
- 
- Async/await is actually just syntax sugar built on top of promises.
- Async/await makes asynchronous code look and behave like synchronous code. This is where all its power lies.
+
+/*
+ Await version
+
+Async/await is just syntax sugar for Promise, makeing asynchronous code look and behave like synchronous code
+Async functions always return a promise
  */
 
+const addString3 = (previous, current) => new Promise(resolve => {setTimeout(() => resolve(previous + ' ' + current), 3000);});
 
-// Await version
-function addString(previous, current) {
-    return new Promise((resolve, reject) => {
-        setTimeout( () => {resolve(previous + '' + current)}, 100)
-    });
-}
-
-// async” before a function means : a function always returns a promise.
-// If the return s <non-promise>, then it is automatically wrapped into a resolved promise with that value.
-async function addAll(){
+async function addAll3() {
     let result = "";
-    try{
-        // await works only inside async functions 
-        // await pauses async function execution until a Promise is resolved (fulfilled/rejected)
-        result = await addString(result, "A");
-        result = await addString(result, "B");
-        result = await addString(result, "C");
-        // without await, result refers to a promise object (rather than the resolved value)
-    } catch(e){
-    }
 
-    console.log(result);
+    // await syntax : await expression; only valid inside async function
+    // it returns the fulfilled value of the promise, or the value itself if it's not a Promise.
+    // await block async function execution to pause until a Promise is settled
+    // await does not block async function's caller 
+
+    result = await addString3(result, "A");  // wait until addString() returns a promise
+    result = await addString3(result, "B");  // wait until addString() returns a promise
+    result = await addString3(result, "C");   // wait until addString() returns a promise
+
+    // without await, everything executed synchronously, result is a resolved promise 
+
+    console.log("all reoslved : ", result);
+    return result;
 }
 
-addAll();
-
-/* 
-    every single thing you await will ordinarily be a promise.
-    A promise is a special object which contains another object.
-    await will simply pause the execution of my method until the value from the promise is available.
-    async/await and promises are the same thing under the hood.
- */
+let p = addAll3();  
+// p is a pending promise right after calling addAll(), 
+// after 9s, it becomes resolved promise with value: A B C
+// nothing is blocking in this context

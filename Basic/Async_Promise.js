@@ -1,69 +1,85 @@
 /*
-The Promise object represents the eventual completion (or failure) of an asynchronous operation
+Promise is an object which represents the eventual completion (or failure) of an asynchronous operation
+A promise object has a value and status, which could be:
+    pending: initial state, neither fulfilled nor rejected. 
+    fulfilled: when resolve() is first invoked, means the operation completed.
+    rejected:  when reject() is first invoked,  means the operation failed.
 
-A Promise is in one of these states:
-    pending: initial state, neither fulfilled nor rejected.
-    fulfilled: meaning that the operation completed successfully.
-    rejected: meaning that the operation failed.
-
-Promise construtor takes a paramater one executor function.
-executor normally initiates asynchronous work, once completes, either calls resolve to resolve the promise or rejects if an error occurred. 
-
-If an error is thrown in the executor function, the promise is rejected. The return value of the executor is ignored
-
-A promise can only succeed(resolved) or fail(reject) once.
-
-If a promise has succeeded or failed and you later add a success/failure callback (i.e a .then),
-the correct callback will be called, even though the event took place earlier.
-
-promise caches the result, and will give the same result next time.
-
-Promise object is immutable
-
+A promise can only be settled once (fulfilled or rejected), subsequent invocation to resolve()/reject()
+does not change the promise (immutability).  
 */
 
 
-// Promise constructor takes a executor function with the arguments resolve and reject
-// executor is invoked right now. wrap executor in functions if need to be invoked later 
+
+
+/*  Promise construtor takes 1 parameter, an executor function 
+
+    Executor works asynchronously, and takes 2 parameters resolve and reject.
+    the first resolve/reject to be invoked determines the status of the promise
+
+    executor is invoked eagerly. meaning a promise starts working once the promise constructor is invoked 
+    wrap executor in functions if need to be invoked later 
+
+    If an error is thrown in the executor function, the promise is rejected. 
+    The return value of the executor is ignored  
+*/
 const promise = new Promise((resolve, reject) => {
-    if (Math.random() * 100 < 90) {
-        resolve('Hello, Promises!');
-    }
+  if (Math.random() * 100 < 90) {
+    resolve("90%");
+  }
 
-    reject(new Error('In 10% of the cases, I fail. Miserably.'));
+  reject("10%");
+  // even if resolve() is called, reject() is still get called
+  // but since the promise is already settled, subsequent reject call does nothing
 });
 
 
-//then() accepts two callbacks, and returns a promise
-// 1st callback is invoked when the promise is resolved. 2nd callback is executed when the promise is rejected or an error was thrown
+
+// promise object itself does not expose its value/status, use promise.then(resolve(promiseValue), reject(rejectionReason)) to assess
+// promise.then(resolve(promiseValue), reject(rejectionReason)) returns a new promise
+// resolve/reject are callback functions for the success and failure cases of the promise 
+// resolve and reject are called asynchronously, and are both optional, they can be called only once
+
+// if resolve/reject returns a value(v1), the promise returned by promise.then() is resolved with the same value (as v1)
+// if resolve/reject return a promise (p1), promise returned by promise.then() has the same state and value (as p1)
+// if resolve/reject throws an error, promise returned by promise.then() is rejected with the exception as reason
+// if resolve/reject is not a function, promise(p2) returned by promise.then() has the same state and value (as p2)
+
+
 promise.then(
-    (resolvedValue) => {console.log(resolvedValue);}, 
-    (error) => {console.log(error);
-});
-
-
-// wrap executor in functions if need to be invoked later 
-const delay = (ms) => new Promise(
-  (resolve) => setTimeout(resolve, ms)
+  promiseValue => console.log(promiseValue),
+  rejectionReason => console.log(rejectionReason)  //  Error object is good option for rejectionReason
 );
 
-delay(2000)
+
+// wrap primise constructor in functions if need to be invoked later
+const delay = time => new Promise(resolve => setTimeout(resolve, time));
+
+// promise.then() can be called more than once and chain to aggregate callbacks.
+delay(2000) // return a promise
   .then(() => {
-    console.log('Resolved after 2 seconds')
-    return delay(1500);
+    console.log("Resolved after 2 seconds");
+    return delay(1500);  // return a promise
   })
   .then(() => {
-    console.log('Resolved after 1.5 seconds');
-    return delay(3000);
-  }).then(() => {
-    console.log('Resolved after 3 seconds');
+    console.log("Resolved after 1.5 seconds");
+    return delay(3000);   // return a promise
+  })
+  .then(() => {
+    console.log("Resolved after 3 seconds");
     throw new Error();
-  }).catch(() => {  // .catch is just a syntactical sugar for .then(undefined, onRejected).
-    console.log('Caught an error.');
-  }).then(() => {
-    console.log('Done.');
+  })
+  .catch(() => {
+    // catch(reject) catches error thrown from both previous then(resolve, reject) and the resolve (param in then) 
+    // good practice: ending all promise chains with a .catch()
+    console.log("Caught an error.");
   });
 
 
 
+//  Do not call Promise.resolve on a thenable that resolves to itself. 
 
+// Promise.resolve() returns a resolved promise.
+// Promise.reject() returns a rejected promise.
+// Promise.race() takes an array (or any iterable) and returns a promise that resolves with the value of the first resolved promise in the iterable, or rejects with the reason of the first promise that rejects.
+// Promise.all() takes an array (or any iterable) and returns a promise that resolves when all of the promises in the iterable argument have resolved, or rejects with the reason of the first passed promise that rejects.

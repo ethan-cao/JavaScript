@@ -1,6 +1,7 @@
 /**
 The function* declaration defines a generator function, which returns a generator object {value: value, done: true/false}
-A generator object is iterator and also iterable. Generator fx can be exited and later re-entered. Their context (variable bindings) will be saved across re-entrances.
+A generator object is iterator and also iterable. 
+Generator fx can be exited and later re-entered. Their context (variable bindings) will be saved across re-entrances.
 
 Invoking generator fx does not execute its body immediately, an iterator object is returned instead. 
 
@@ -17,8 +18,7 @@ A return statement in generator fx, when executed, will make the generator finis
 when used with for..of loops, the final returned value would be thrown away.
 
 Error thrown inside the generator will make the generator finished -- unless caught within the generator's body
-**/
-
+*/
 
 function* generator1(x) {
     let y = 2 * x;
