@@ -16,3 +16,9 @@
 ::selection {
     background-color: cyan;
 }
+
+@media (min-width:500px)  {
+    .selector-test>p:first-child {
+        background-color:lightsalmon;
+    }
+}

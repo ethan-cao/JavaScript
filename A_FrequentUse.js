@@ -12,14 +12,6 @@ nums.pop();   // Removes value at the last index, nums = [1,2,3,4,5,100];
 
 nums.unshift(0); //Add to the first index, nums = [0,1,2,3,4,5,100];
 nums.shift();   //remove value at the first index, nums = [1,2,3,4,5,100];
-
-// const deletedItemsArray = array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
-nums.splice(0, 0, -1, 0);  // nums = [-1,0,1,2,3,4,5,100]
-nums.splice(0, 2);         // nums = [1,2,3,4,5,100]
-
-const newNums = nums.slice(); // copy the array
-newNums = nums.slice(0, 5);  // copy the array from 0 til 4
-
 // The default sort order is built upon converting the elements into strings, 
 nums.sort(); // [1, 100, 2, 3, 4, 5]
 nums.sort((a,b)=>a-b);  //  [1,2,3,4,5,100];
@@ -32,14 +24,20 @@ nums.some(x=>x>=5); //true
 nums.every(x=>x>=5); // false
 nums.reduce((a,b)=>a+b) // 15 (accumulator, currentValue) => accumulator + currentValue
 
+// batch add/remove elements
+// array.splice(start[, deleteCount[, itemToAdd1[, itemToAdd2[, ...]]]])
+var newArray = nums.splice(0, 0, -1, 0);  // nums = [-1,0,1,2,3,4,5,100]
+var newArray = nums.splice(0, 2);         // nums = [1,2,3,4,5,100]
+
+var newArray = nums.slice(); // copy the array
+var newArray = nums.slice(0, 5);  // copy the array from 0 til 4
+
 // tranform array-like or iterable into true array
-const charArray = Array.from("char"); // ["c", "h", "a", "r"]
+var newArray = Array.from("char"); // ["c", "h", "a", "r"]
 // create array from every arguments
-newNums = Array.of(1, 2, 3, 4, 5, 6);  //  [1, 2, 3, 4, 5, 6]
-
+var newArray = Array.of(1, 2, 3, 4, 5, 6);  //  [1, 2, 3, 4, 5, 6]
 //concatenate array
-arr1.concat(arr2).concat(arr3);
-
+var newArray = arr1.concat(arr2).concat(arr3);
 
 
 
@@ -61,10 +59,7 @@ id.substring(0, id.length - 2);
 
 
 
-
 /** Set */
-
-
 
 
 
@@ -73,7 +68,7 @@ id.substring(0, id.length - 2);
 const $tableBody = $("tbody"); // select all tbody elements
 const bgColor = $tableBody.css("background-color"); // get CSS property valye
 
-const $rows = $tableBody.children(); // get direct children (matching selector)
+const $rows = $tableBody.children(); // .children( [selector ] ) : get direct children that matches selector
 const $cell = $tableBody.find(".newClass"); // get all descents matching selector
 
 $rows.each((idx, rowElem) => {
