@@ -12,6 +12,7 @@ f1 = (x, y) => 1; // () is only required for multiple params
 console.log(f1(1));  // 1
 
 // ... (rest parametera) represens an indefinite number of arguments as an array.
+// since arguments is shared with its caller, we cannot use arguments
 f1 = (...args) => args.length;
 console.log("args length : ",  f1(1,2,3));
 

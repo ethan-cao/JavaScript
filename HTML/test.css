@@ -5,8 +5,10 @@
 .selector-test>p::after {
     content: " + after";
 }
+
 .selector-test>p {
     border: solid green;
+    width: calc(100% - 100px); /* performs a calculation */ 
 }
 
 .selector-test>p::first-letter{
@@ -22,3 +24,11 @@
         background-color:lightsalmon;
     }
 }
+
+/* feature query: test if the browser supports a particular property or property */
+@supports (display: grid) {
+    /*CSS applies only the browser supports*/
+    .selector-test  {
+      display: grid;
+    }
+  }

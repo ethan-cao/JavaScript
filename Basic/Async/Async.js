@@ -64,3 +64,6 @@ let p = addAll3();
 // p is a pending promise right after calling addAll(), 
 // after 9s, it becomes resolved promise with value: A B C
 // nothing is blocking in this context
+
+
+// Observable version
