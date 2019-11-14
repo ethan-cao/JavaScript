@@ -18,6 +18,7 @@ does not change the promise (immutability).
     the first resolve/reject to be invoked determines the status of the promise
 
     executor is invoked eagerly. meaning a promise starts working once the promise constructor is invoked 
+    executor is invoked only once
     wrap executor in functions if need to be invoked later 
 
     If an error is thrown in the executor function, the promise is rejected. 
@@ -35,16 +36,18 @@ const promise = new Promise((resolve, reject) => {
 
 
 
-// promise object itself does not expose its value/status, use promise.then(resolve(promiseValue), reject(rejectionReason)) to assess
-// promise.then(resolve(promiseValue), reject(rejectionReason)) returns a new promise
-// resolve/reject are callback functions for the success and failure cases of the promise 
-// resolve and reject are called asynchronously, and are both optional, they can be called only once
+// promise object itself does not expose its value/status, 
+// use promise.then(resolve(promiseValue), reject(rejectionReason)) to assess
+// promise.then(resolve(promiseValue), reject(rejectionReason)) returns a !NEW! promise
+// resolve/reject are callback functions for the success/failure cases 
+// resolve/reject are called asynchronously, and are both optional, they can be called only once
 
 // if resolve/reject returns a value(v1), the promise returned by promise.then() is resolved with the same value (as v1)
 // if resolve/reject return a promise (p1), promise returned by promise.then() has the same state and value (as p1)
 // if resolve/reject throws an error, promise returned by promise.then() is rejected with the exception as reason
 // if resolve/reject is not a function, promise(p2) returned by promise.then() has the same state and value (as p2)
 
+// then can be called on the same promise multiple times
 
 promise.then(
   promiseValue => console.log(promiseValue),
@@ -52,7 +55,7 @@ promise.then(
 );
 
 
-// wrap primise constructor in functions if need to be invoked later
+// wrap promise constructor in functions if need to be invoked later
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 // promise.then() can be called more than once and chain to aggregate callbacks.
