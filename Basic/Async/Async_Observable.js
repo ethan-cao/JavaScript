@@ -1,103 +1,101 @@
 /*
+http://reactivex.io/rxjs/manual/overview.html
+
 RxJS is the JavaScript implementation of the ReactiveX project. 
 The ReactiveX project aims at providing an API for asynchronous programming 
 The fundamental paradigm of ReactiveX is observer pattern using observable. 
+
+e.g.
+const observable = new Observable(observer => observer.next(1));
+const subscription = observable.subscribe(x = > console.log(x));
+subscription.unsubscribe();
 */
 
 // import is not part of JS, use webpack as transpiler
-import {Observable} from 'rxjs';
+// import {Observable} from 'rxjs';
 
-
-
-/**
- * Single value vs Multiple values
- */
-const numberPromise = new Promise(resolve => {
-    resolve(5);
-    resolve(10);
-});
-
-// prints only 5
-numberPromise.then(value => {console.log("promise: " + value)});
-
-// unlike promise that can only settle once, Observables can emit multiple times
-const numberObservable = new Observable(observer => {
-    observer.next(5);
-    observer.next(6);
-    observer.next(7);
-});
-
-// print 1,2,3
-numberObservable.subscribe(value => console.log("observable: " + value));
-
-
+// use require() if debug using NodeJs,
+const { Observable } = require("rxjs");
 
 
 /**
- * Eager vs lazy
+ *   Observable represents an invokable collection of future values or events.
  */
+let observable = null;
 
- // instantiate a promise instance invokes the executor function immediately 
- // initialized Promise represents process that has started happening (HTTP request is sent)
- // and we are just waiting for resulting value
-const secondPromise = new Promise(resolve => {
-    let i = 0;
-    setInterval(() => {resolve(++i)}, 3000); // invoked 
-});
-
- // instantiate a promise instance does not invokes the function immediately 
- // initialized Observable represents process that might start happening 
- // it will start only when we actually subscribe
-const secondObservable = new Observable(observer => {
-    let i = 0;
-    setInterval(() => {observer.next(++i)}, 3000); // not invoked
-});
-
-secondObservable.subscribe(value => console.log("observable: " + value)); // start invoking 
-
-
-
-// subscribe returns a Subscription for given Observable. This Subscription has only one method unsubscribe 
-
-
-/**
- * not cancellable vs cancellable
- */
-
- //  Observable can be canceled, but ES6 Promises cannot
-const secondObservable1 = new Observable(observer => {
-    let i = 0;
-    const token = setInterval(() => {observer.next(++i);}, 3000);
-    return () => clearInterval(token);
-});
-
-const subscription = secondObservable1.subscribe(value => console.log("observable1: " + value));
-// use subscription.unsubscribe() to cancel 
-setTimeout(subscription.unsubscribe.bind(subscription), 7000);
-
-
-
-/**
- * Multicast vs Unicast/Multicast
- */
-
- // Multicast: executor function is invoked only once, regardless how many calls to then()
-const watiOneSecondPromise = new Promise(resolve => {
-    console.log("waitOneSecondPromise");
-    resolve(1);
-});
-watiOneSecondPromise.then(() => console.log("Multicast"));   // executor function not invoked
-watiOneSecondPromise.then(() => console.log("Multicast"));   // executor function not invoked
-
- // Unicast by default: subscribe function is invoked by each call to subscribe()
-const waitOneSecondObservable = new Observable(observer => {
-    console.log("waitOneSecondObservable");
+observable = Observable.create(observer => {
     observer.next(1);
 });
-waitOneSecondObservable.subscribe(value => console.log(value));  // subscribe function invoked 
-waitOneSecondObservable.subscribe(value => console.log(value));  // subscribe function invoked 
 
-//  Multicast using share()
-const sharedWaitOneSecondObservable = waitOneSecondObservable.share();
-sharedWaitOneSecondObservable.subscribe("Multicast");
-sharedWaitOneSecondObservable.subscribe("Multicast");
+// constructor take a subscribe function as parameter, subscribe function has a parameter observer
+// subscribe() represents an Observable execution, it start execution only when an Observer subscribes to the Observable
+observable = new Observable(observer => {
+    observer.next(1);
+
+    return function unsubscribe() {
+        // without returning unsubscribe(), subscription.unsubscribe() just cancels the exexcution
+        // With returning unsubscribe(), it makes possible to to cancel and dispose resource
+    };
+});
+
+
+/**
+ *  Observers is a set of callbacks(next, error, complete), that listens and handles values delivered by the Observable
+ *  Observers is a consumer of values delivered by an Observable, 
+ * 
+ *  In an Observable Execution, multiple Next can be delivered. 
+ *  If either an Error or Complete notification is delivered, then nothing else can be delivered afterwards.
+ */
+var observer = {
+    next: x => console.log('Observer got a next value: ' + x),
+    error: err => console.error('Observer got an error: ' + err),
+    complete: () => console.log('Observer got a complete notification'),
+};
+
+
+/**
+ *  use observable.subscribe(observer) to make Observer subscribes to the Observable
+ * 
+ *  observable.subscribe(observer) is invoked, subscribe() in Observable constructor is invoked for that particular observer
+ *  Each call to observable.subscribe triggers its own independent setup for that given Observer  (unicast)
+ * 
+ *  Subscribing to an Observable is analogous to calling a Function.
+ */
+const subscription = observable.subscribe(
+    x => console.log('Observer got a next value: ' + x),
+    err => console.error('Observer got an error: ' + err),
+    () => console.log('Observer got a complete notification')
+);
+
+
+
+/**
+ *  observable.subscribe(observer) returns an Subscription object, represents the Observable execution ,
+ *  use subscription.unsubscribe() to cancel the Observable execution or release resource
+ */
+subscription.unsubscribe();
+
+
+
+
+
+
+
+
+
+
+/**
+ *  Subject is a special type of Observable that allows values to be multicasted to many Observers. 
+ *  It is the equivalent to an EventEmitter, and the only way of multicasting a value or event to multiple Observers
+ *  While plain Observables are unicast (each subscribed Observer owns an independent execution of the Observable), Subjects are multicast.
+ *  A Subject is like an Observable, but can multicast to many Observers. Subjects are like EventEmitters: they maintain a registry of many listeners.
+ *  Every Subject is an Observable.
+ *  Every Subject is an Observer. 
+ *  To feed a new value to the Subject, just call next(theValue), and it will be multicasted to the Observers registered to listen to the Subject.
+ */
+
+
+ 
+/**
+ * Operators: are pure functions that enable a functional programming style of dealing with collections
+ */
