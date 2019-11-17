@@ -1,7 +1,8 @@
-/*
+/**
 http://reactivex.io/rxjs/manual/overview.html
 
-RxJS is the JavaScript implementation of the ReactiveX project. 
+Observable is not part of JavaScript specification, it is defined in RxJS
+RxJS is the JS implementation of the ReactiveX project. 
 The ReactiveX project aims at providing an API for asynchronous programming 
 The fundamental paradigm of ReactiveX is observer pattern using observable. 
 
@@ -23,19 +24,16 @@ const { Observable } = require("rxjs");
  */
 let observable = null;
 
-observable = Observable.create(observer => {
-    observer.next(1);
-});
+observable = Observable.create(observer => {observer.next(1);});
 
 // constructor take a subscribe function as parameter, subscribe function has a parameter observer
-// subscribe() represents an Observable execution, it start execution only when an Observer subscribes to the Observable
+// param subscribe represents an Observable execution, it starts execution only when an Observer subscribes to the Observable
 observable = new Observable(observer => {
     observer.next(1);
 
-    return function unsubscribe() {
-        // without returning unsubscribe(), subscription.unsubscribe() just cancels the exexcution
-        // With returning unsubscribe(), it makes possible to to cancel and dispose resource
-    };
+    // without returning unsubscribe(), subscription.unsubscribe() just cancels exexcution
+    // With returning unsubscribe(), it makes possible to to cancel execution and dispose resource
+    return function unsubscribe() {};
 });
 
 
@@ -46,7 +44,7 @@ observable = new Observable(observer => {
  *  In an Observable Execution, multiple Next can be delivered. 
  *  If either an Error or Complete notification is delivered, then nothing else can be delivered afterwards.
  */
-var observer = {
+const observer = {
     next: x => console.log('Observer got a next value: ' + x),
     error: err => console.error('Observer got an error: ' + err),
     complete: () => console.log('Observer got a complete notification'),
