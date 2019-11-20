@@ -1,4 +1,6 @@
 const fetch = require("node-fetch")
+const Request = fetch.Request;
+
 
 
 const url = 'https://randomuser.me/api/?results=10';
@@ -37,7 +39,7 @@ fetch(url, fetchData)
 var request = new Request(url, {
     method: 'POST', 
     body: data, 
-    headers: new Headers()
+    headers: {}
 });
 fetch(request)
 .then(res => console.log(res));
