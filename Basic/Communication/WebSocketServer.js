@@ -1,4 +1,17 @@
+// Runtime: NodeJS
+// Run node WebSocketServer.js
+const WebSocket = require("ws");
 
-const socket = new WebSocket("ws://echo.websocket.org");
+const webSocketServer = new WebSocket.Server({ port: 8080 })
 
-console.log(typeof socket);
+webSocketServer.on("connection", webSocket => {
+    console.log("Connection established.");
+
+    webSocket.on("message", msg => {
+        console.log("Received: ", msg)
+
+        // echo 
+        webSocket.send(msg); 
+   });
+
+});
