@@ -21,6 +21,10 @@ Then, delete 3 again to earn 3 points, and 3 again to earn 3 points.
 
 */
 
+
+
+
+
 var deleteAndEarn = function(nums) {
 	const SIZE = 10000;
 
@@ -40,24 +44,26 @@ var deleteAndEarn = function(nums) {
 	return maxPoints[maxPoints.length - 1];
 };
 
-var deleteAndEarn = function(nums) {
+var deleteAndEarn1 = function(nums) {
     const SIZE = 10000;
     
     const sums = new Array(SIZE).fill(0);
     for (let num of nums) {
         sums[num] += num;
     }
-    
+
     let count = 0;
-    let dismiss = 0;
-    
+    let skip = 0;
+  
     for (let i = 0; i < SIZE; ++i) {
-        let countI = sums[i] + dismiss;
-        let dismissI = Math.max(count, dismiss);
-        
+        let countI = sums[i] + skip;
+        let skipI = Math.max(count, skip);
+
         count = countI;
-        dismiss = dismissI;
+        skip = skipI;
     }
-   
-    return Math.max(dismiss, count);
+
+    return Math.max(count, skip);
 }
+
+console.log(deleteAndEarn1([2, 2, 3, 3, 3, 4])); // 9

@@ -9,7 +9,7 @@ Array.prototype.arrCustom = function() {};
 let iterable = [3, 5, 7];
 iterable.foo = 'hello';
 
-// for...in is built for iterating enumerable properties, not recommended for use with arrays
+// for...in is built for iterating enumerable properties, not recommended to use with arrays
 // applicable for Array, Map, String, Set, arguments
 for (let i in iterable) {
   console.log(i); // 0, 1, 2, "foo", "arrCustom", "objCustom"
