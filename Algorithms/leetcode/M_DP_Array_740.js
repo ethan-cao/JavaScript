@@ -21,10 +21,6 @@ Then, delete 3 again to earn 3 points, and 3 again to earn 3 points.
 
 */
 
-
-
-
-
 var deleteAndEarn = function(nums) {
 	const SIZE = 10000;
 

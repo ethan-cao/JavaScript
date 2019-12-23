@@ -1,0 +1,64 @@
+/*
+Given a string S and a string T,
+find the minimum window in S which will contain all the characters in T in complexity O(n).
+
+If there is no such window in S that covers all characters in T, return the empty string "".
+If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
+
+### Example
+Input: S = "ADOBECODEBANC", T = "ABC"
+Output: "BANC"
+
+### Review:
+
+*/
+
+var minWindow = function(s, t) {
+    if (t.length > s.length || s.length === 0 || t.length === 0) {
+        return "";
+    }
+
+	const counter = new Array(128).fill(0);
+	for (let c of t) {
+		counter[c.charCodeAt(0)]++;
+	}
+
+	let left = 0;
+	let right = 0;
+
+	let requiredCharCount = t.length;
+	let minLength = Number.MAX_VALUE;
+	let minLeft = 0;
+
+	while (right < s.length) {
+		const rightChar = s[right];
+
+		if (counter[rightChar.charCodeAt(0)] > 0) {
+			requiredCharCount--;
+		}
+
+		counter[rightChar.charCodeAt(0)]--;
+		right++;
+
+		while (requiredCharCount === 0) {
+			if (right - left < minLength) {
+				minLength = right - left;
+				minLeft = left;
+			}
+
+			const leftChar = s[left];
+
+			if (counter[leftChar.charCodeAt(0)] >= 0) {
+				requiredCharCount++;
+			}
+
+			counter[leftChar.charCodeAt(0)]++;
+			left++;
+		}
+	}
+
+	return minLength === Number.MAX_VALUE ? "" : s.substring(minLeft, minLeft + right);
+};
+
+console.log(minWindow("ADOBECODEBANC", "ADB")); // ADOB
+console.log(minWindow("ADOBECODEBANC", "ABC")); // BANC
