@@ -4,13 +4,18 @@
 <html>
     <head>
         <title>HTML Test</title>
-        <link rel="stylesheet" type="text/css" href="xxx.css">
-        <script defer type="text/javascript" charset="UTF-8" src="xxx.js"></script>
+        <script type="text/javascript" src="xxx.js" defer></script>
+        <link type="text/css" rel="stylesheet" href="xxx.css">
     </head>
     <body>
         
         <!-- Locate script just before </body>. This assures HTML is parsed before executing script 
             effectively the same as putting <script defer> in <header></header>   -->
-        <script src="xxx.js"></script>
+        <script>
+        </script>
+
+        <style>
+        </style>
+
     </body>
 </html>
