@@ -25,11 +25,11 @@
                     <line class="scale__bar" x1="300" y1="0" x2="300" y2="30" transform="rotate(330, 300, 300)"/>
                 </g>
 
-                <g class="scales_numbers" transform="translate(80,80)">
-                    <!-- <text class="scale__number" x="220" y="0" transform="rotate(0, 300, 300)">12</text>
-                    <text class="scale__number" x="440" y="220" transform="rotate(0, 300, 300)">3</text>
-                    <text class="scale__number" x="220" y="440" transform="rotate(0, 300, 300)">6</text>
-                    <text class="scale__number" x="0" y="220" transform="rotate(0, 300, 300)">9</text> -->
+                <g class="scales_numbers" transform="translate(300, 70)">
+                    <g class="scale__number" transform="rotate(0, 0, 230)"><text transform="rotate(0)">12</text></g>
+                    <g class="scale__number" transform="rotate(90, 0, 230)"><text transform="rotate(-90)">3</text></g>
+                    <g class="scale__number" transform="rotate(180, 0, 230)"><text transform="rotate(-180)">6</text></g>
+                    <g class="scale__number" transform="rotate(270, 0, 230)"><text transform="rotate(-270)">9</text></g>
                 </g>
 
                 <g class="hands" transform="translate(300, 300)">
@@ -52,7 +52,7 @@
                 let hour= date.getHours();
                 let minute = date.getMinutes();
                 let second = date.getSeconds();
-                let mSecond = date.getMilliseconds();
+                let mSecond = date.getMilliseconds();  // use milliseconds to make it smooth
                 console.log(`Hour: ${hour}   Minutes: ${minute}   Seconds: ${second}`);
 
                 const secondRotation = (second * 1000 + mSecond) / 60 / 1000 * 360;
@@ -70,6 +70,10 @@
         </script>
 
         <style>
+            #clock-container{
+                font-size: 5px;
+            }
+
             .periphery{
                 fill:transparent;
                 stroke: silver;
@@ -85,7 +89,7 @@
                 stroke: black;
             }
 
-            .scale__number {
+            .scale__number>text {
                 font: italic 40px serif;
                 text-anchor: middle;
             }
