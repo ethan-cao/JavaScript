@@ -1,4 +1,4 @@
-testMap();
+testString();
 
 function testArray() {
 	const nums = [1, 2, 3, 4, 5, 100];
@@ -22,8 +22,8 @@ function testArray() {
 	nums.map((x) => x + 1); // [2,3,4,5,6]
 
 	nums.includes(2); // true
-	nums.some((x) => x >= 5); //true
-	nums.every((x) => x >= 5); // false
+	nums.some(x => x >= 5); //true
+	nums.every(x => x >= 5); // false
 	nums.reduce((a, b) => a + b); // 15 (accumulator, currentValue) => accumulator + currentValue
 
 	// batch add/remove elements
@@ -38,8 +38,14 @@ function testArray() {
 	var newArray = Array.from("char"); // ["c", "h", "a", "r"]
 	// create array from every arguments
 	var newArray = Array.of(1, 2, 3, 4, 5, 6); //  [1, 2, 3, 4, 5, 6]
+	
 	//concatenate array
-	var newArray = arr1.concat(arr2).concat(arr3);
+	// var newArray = arr1.concat(arr2).concat(arr3);
+
+	// new Array() and Array() produce the same result
+	let oneDArray = new Array(3).fill(0);
+	let twoDArray = new Array(3).fill(0).map(x => Array(3).fill(0)); // 10% slower than using loop
+
 }
 
 function testString() {
@@ -51,12 +57,10 @@ function testString() {
 		console.log(char);
 	}
 
+	s.charAt(2); // s
 	s.includes("te"); //true
-
 	s.split("_"); // ["test", "text"]
-
-	//cut last 2 char:
-	id.substring(0, id.length - 2);
+	s.substring(0, s.length - 2); //cut last 2 char:
 }
 
 function testSet() {
