@@ -6,12 +6,10 @@ The input strings only contain lower case letters.
 The length of both given strings is in range [1, 10,000].
 
 ### Example
-Input: s1 = "ab" s2 = "eidbaooo"
-Output: True
+Input: s1 = "ab" s2 = "eidbaooo" ->  True
 Explanation: s2 contains one permutation of s1 ("ba").
 
-Input:s1= "ab" s2 = "eidboaoo"
-Output: False
+Input:s1= "ab" s2 = "eidboaoo" ->  False
 
 ### Review:
 

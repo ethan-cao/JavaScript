@@ -53,7 +53,7 @@ function testString() {
 
 	console.log(s.length); // 8
 
-	for (const char of s) {
+	for (let char of s) {
 		console.log(char);
 	}
 
@@ -61,6 +61,8 @@ function testString() {
 	s.includes("te"); //true
 	s.split("_"); // ["test", "text"]
 	s.substring(0, s.length - 2); //cut last 2 char:
+	s.charCodeAt(0); // asc2 code for the 1st char
+
 }
 
 function testSet() {

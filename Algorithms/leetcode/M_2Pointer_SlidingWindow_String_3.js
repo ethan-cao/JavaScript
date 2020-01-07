@@ -12,35 +12,46 @@ Given a string, find the length of the longest substring without repeating chara
 
 */
 
+"use strict";
+
+// 72 ms
 var lengthOfLongestSubstring = function(s) {
-	let longestLength = 0;
+    let longestLength = 0;
 
 	if (s === null || s.length === 0) {
 		return longestLength;
 	}
 
-	let lastAppearingIdx = new Array(26).fill(-1);
-
-	let left = 0;
-	let right = 0;
-
-	while (right < s.length) {
-		let char = s[right];
-
-		if (lastAppearingIdx[char.charCodeAt(0) - "a".charCodeAt(0)] >= left) {
-			left = lastAppearingIdx[char.charCodeAt(0) - "a".charCodeAt(0)] + 1;
-		}
-
-		lastAppearingIdx[char.charCodeAt(0) - "a".charCodeAt(0)] = right;
-
-		longestLength = Math.max(longestLength, right - left + 1);
-
-		right++;
-	}
-
+    let left = 0;
+    let right = 0;
+    
+    const lastAppearingIdx = new Array(128).fill(-1);
+    
+    while (right < s.length) {
+		const rightChar = s.charAt(right);
+		
+		// since we recored the last appearing index, no need to use anther loop
+        // while (lastAppearingIdx[rightChar.charCodeAt(0)] >= left && left < right) {
+        //     const leftChar = s.charAt(left);
+        //     lastAppearingIdx[leftChar.charCodeAt(0)] = -1;
+        //     left++;
+        // }
+               
+        if (lastAppearingIdx[rightChar.charCodeAt(0)] >= left ) {
+            left = lastAppearingIdx[rightChar.charCodeAt(0)] + 1;
+        }
+       
+        lastAppearingIdx[rightChar.charCodeAt(0)] = right;
+        
+        longestLength = Math.max(longestLength, right - left + 1);
+        
+        right++;
+    }
+    
 	return longestLength;
 };
 
+// 84 ms
 var lengthOfLongestSubstring1 = function(s) {
 	let longestLength = 0;
 
