@@ -1,23 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="en">
 	<head>
 		<title>Autocomplete</title>
 	</head>
 	<body>
-		<div class="container">
-			<div class="row">
-				<div class="column">
-					<h3>US State Capital</h3>
-					<div class="form">
-						<input
-							type="search"
-							id="search"
-							placeholder="Enter Name or abbreviation."
-						/>
-					</div>
-					<div id="match-list"></div>
-				</div>
-			</div>
+		<div class="autocomplete-container">
+			<input type="search" id="search" placeholder="Enter Name or abbreviation."/>
+			<span>Cancel</span>
+			<div id="match-list"></div>
 		</div>
 
 		<script>
@@ -409,5 +400,39 @@
 			search.addEventListener("input", () => searchStates(search.value));
 
 		</script>
+
+		<style>
+			body {
+				font-size: 20px;	
+			}	
+
+			.autocomplete-container {
+				display: flex;
+				background-color:whitesmoke;
+				width: 20em;
+				box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
+			}
+
+			input {
+				padding: 1em;
+				font-weight: 300;
+				width: 100%;
+				border: none;
+				outline: none;
+			}
+
+			.match-list{
+				width: 100%;
+  				display: none;
+  				min-height: 40px;
+    			max-height: 330px;
+  				overflow: scroll;
+  				border-top: 1px solid #f4f4f4;
+			}
+
+			.match-list:hover {
+  				background: #f2f2f2;
+			}
+		</style>
 	</body>
 </html>

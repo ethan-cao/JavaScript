@@ -15,67 +15,73 @@ Input:s1= "ab" s2 = "eidboaoo" ->  False
 
 */
 
+// 68ms
 var checkInclusion = function(s1, s2) {
-	if (s1.length > s2.length) {
-		return false;
-	}
-
-	let counter = new Array(26).fill(0);
-	for (let i = 0; i < s1.length; ++i) {
-		counter[s1[i].charCodeAt(0) - "a".charCodeAt(0)]++;
-	}
-
-	let left = 0;
-	let right = 0;
-
-	while (right < s2.length) {
-		let rightChar = s2[right];
-		counter[rightChar.charCodeAt(0) - "a".charCodeAt(0)]--;
-		right++;
-
-		while (counter[rightChar.charCodeAt(0) - "a".charCodeAt(0)] < 0) {
-			let leftChar = s2[left];
-			counter[leftChar.charCodeAt(0) - "a".charCodeAt(0)]++;
-			left++;
-		}
-
-		if (right - left == s1.length) {
-			return true;
-		}
-	}
-
-	return false;
-};
-
-var checkInclusion1 = function(s1, s2) {
 	if (s1.length > s2.length) {
         return false;
     }
-
-    var count = Array(26).fill(0);
-
-	for (var i = 0; i < s1.length; i++) {
-		count[s1[i].charCodeAt(0) - "a".charCodeAt(0)]++;
-		count[s2[i].charCodeAt(0) - "a".charCodeAt(0)]--;
+    
+    let counter = new Array(128).fill(0);
+    for (let char of s1) {
+        counter[char.charCodeAt(0)]++;
     }
-
-	if (isEmpty(count)) {
-        return true;
+    
+    let left = 0;
+    let right = 0;
+    
+    while (right < s2.length) {
+        const rightChar = s2.charAt(right);
+        counter[rightChar.charCodeAt(0)]--;
+        
+        while (counter[rightChar.charCodeAt(0)] < 0 && left <= right) {
+            const leftChar = s2.charAt(left);
+            counter[leftChar.charCodeAt(0)]++;
+            
+            left++;
+        } 
+        
+        if (right - left + 1 === s1.length) {
+            return true;
+        }
+        
+        right++;
     }
+    
+    return false;
+};
 
-	for (var j = s1.length; j < s2.length; j++) {
-		count[s2.charCodeAt(j) - "a".charCodeAt(0)]--;
-		count[s2.charCodeAt(j - len1) - "a".charCodeAt(0)]++;
-		if (isEmpty(count)) return true;
-	}
-
-	return false;
-
-	function isEmpty(count) {
-		for (var i = 0; i < 26; i++) {
-			if (count[i] !== 0) return false;
-		}
-		return true;
+var isEmpty = counter => {
+    for (let count of counter){
+        if (count !== 0) {
+            return false;
+        }
     }
+    return true;
+}
 
+var checkInclusion1 = function(s1, s2) {
+    if (s1.length > s2.length) {
+        return false;
+    }
+    
+    let counter = new Array(128).fill(0);
+    for (let char of s1) {
+        counter[char.charCodeAt(0)]++;
+    }
+    
+    for (let i = 0; i < s2.length; ++i) {
+        let char = s2.charAt(i);
+        counter[char.charCodeAt(0)]--;
+        
+        if (i >= s1.length) {
+            char = s2.charAt(i-s1.length);
+            counter[char.charCodeAt(0)]++;
+        }
+        
+        if (isEmpty(counter) ) {
+            return true;
+        }
+    }
+         
+    return false;
 };

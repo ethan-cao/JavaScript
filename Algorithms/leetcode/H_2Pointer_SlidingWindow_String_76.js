@@ -14,7 +14,7 @@ Output: "BANC"
 */
 
 var minWindow = function(s, t) {
-    if (t.length > s.length || s.length === 0 || t.length === 0) {
+	if (t.length > s.length || s.length === 0 || t.length === 0) {
         return "";
     }
 
@@ -25,39 +25,41 @@ var minWindow = function(s, t) {
 
 	let left = 0;
 	let right = 0;
-
-	let requiredCharCount = t.length;
-	let minLength = Number.MAX_VALUE;
-	let minLeft = 0;
-
-	while (right < s.length) {
-		const rightChar = s[right];
-
-		if (counter[rightChar.charCodeAt(0)] > 0) {
-			requiredCharCount--;
-		}
-
-		counter[rightChar.charCodeAt(0)]--;
-		right++;
-
-		while (requiredCharCount === 0) {
-			if (right - left < minLength) {
-				minLength = right - left;
-				minLeft = left;
-			}
-
-			const leftChar = s[left];
-
-			if (counter[leftChar.charCodeAt(0)] >= 0) {
-				requiredCharCount++;
-			}
-
-			counter[leftChar.charCodeAt(0)]++;
-			left++;
-		}
-	}
-
-	return minLength === Number.MAX_VALUE ? "" : s.substring(minLeft, minLeft + right);
+    
+    let requiredCharCount = t.length;
+    
+    let minLeft = 0;
+    let minLength = Number.MAX_VALUE;
+    
+    while (right < s.length) {
+        const rightChar = s.charAt(right);
+        counter[rightChar.charCodeAt(0)]--;
+        
+        if (counter[rightChar.charCodeAt(0)] >= 0) {
+            requiredCharCount--;          
+        }
+        
+        while (requiredCharCount === 0) {
+			
+            if (right - left + 1 < minLength) {
+                minLength = right - left + 1;
+                minLeft = left;
+            }
+             
+            let leftChar = s.charAt(left);
+            counter[leftChar.charCodeAt(0)]++;
+            
+            if (counter[leftChar.charCodeAt(0)] > 0) {
+                requiredCharCount++;
+            }
+             
+            left++;
+        }
+        
+        right++;
+    }
+    
+    return minLength === Number.MAX_VALUE ? "" : s.substring(minLeft, minLeft + minLength);
 };
 
 console.log(minWindow("ADOBECODEBANC", "ADB")); // ADOB

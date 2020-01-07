@@ -18,10 +18,6 @@ Given a string, find the length of the longest substring without repeating chara
 var lengthOfLongestSubstring = function(s) {
     let longestLength = 0;
 
-	if (s === null || s.length === 0) {
-		return longestLength;
-	}
-
     let left = 0;
     let right = 0;
     
