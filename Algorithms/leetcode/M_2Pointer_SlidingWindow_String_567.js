@@ -5,6 +5,8 @@ In other words, one of the first string's permutations is the substring of the s
 The input strings only contain lower case letters.
 The length of both given strings is in range [1, 10,000].
 
+This is substring
+
 ### Example
 Input: s1 = "ab" s2 = "eidbaooo" ->  True
 Explanation: s2 contains one permutation of s1 ("ba").
@@ -21,7 +23,7 @@ var checkInclusion = function(s1, s2) {
         return false;
     }
     
-    let counter = new Array(128).fill(0);
+    const counter = new Array(128).fill(0);
     for (let char of s1) {
         counter[char.charCodeAt(0)]++;
     }
@@ -59,6 +61,7 @@ var isEmpty = counter => {
     return true;
 }
 
+// 68 ms
 var checkInclusion1 = function(s1, s2) {
     if (s1.length > s2.length) {
         return false;

@@ -7,7 +7,6 @@
 	<body>
 		<div class="autocomplete-container">
 			<input type="search" id="search" placeholder="Enter Name or abbreviation."/>
-			<span>Cancel</span>
 			<div id="match-list"></div>
 		</div>
 
@@ -16,6 +15,7 @@
 
 			const search = document.querySelector("#search");
 			const matchList = document.querySelector("#match-list");
+			const matchListItems = null;
 
 			const searchStates = async (searchText) => {
 				// assume loading from server
@@ -389,7 +389,7 @@
 
 			const display = matches => {
 				const html = matches.map(match => `
-					<div>
+					<div class="match-list--item">
 						<h5>${match.name} - ${match.abbr}</h5>
 					</div>
 				`).join("");
@@ -397,7 +397,14 @@
 				matchList.innerHTML = html;
 			};
 
-			search.addEventListener("input", () => searchStates(search.value));
+			search.addEventListener("input", evnet => searchStates(search.value));
+
+			matchList.addEventListener("click", evnet => {
+				const selectedText = event.target.innerText;
+
+				search.value= selectedText;				
+				matchList.innerHTML = "";
+			});
 
 		</script>
 
@@ -408,30 +415,25 @@
 
 			.autocomplete-container {
 				display: flex;
+				flex-direction: column;
 				background-color:whitesmoke;
 				width: 20em;
-				box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 			}
 
-			input {
+			#search {
 				padding: 1em;
-				font-weight: 300;
 				width: 100%;
 				border: none;
-				outline: none;
 			}
 
-			.match-list{
-				width: 100%;
-  				display: none;
-  				min-height: 40px;
-    			max-height: 330px;
-  				overflow: scroll;
-  				border-top: 1px solid #f4f4f4;
+			#match-list {
+				display: flex;
+				flex-direction: column;
 			}
 
-			.match-list:hover {
-  				background: #f2f2f2;
+			.match-list--item:hover {
+				  background:lightsteelblue;
 			}
 		</style>
 	</body>

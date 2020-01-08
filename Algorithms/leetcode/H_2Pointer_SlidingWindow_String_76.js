@@ -5,11 +5,13 @@ find the minimum window in S which will contain all the characters in T in compl
 If there is no such window in S that covers all characters in T, return the empty string "".
 If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
 
+This is subsequence
+
 ### Example
 Input: S = "ADOBECODEBANC", T = "ABC"
 Output: "BANC"
 
-### Review:
+### Review: 
 
 */
 
@@ -19,8 +21,8 @@ var minWindow = function(s, t) {
     }
 
 	const counter = new Array(128).fill(0);
-	for (let c of t) {
-		counter[c.charCodeAt(0)]++;
+	for (let char of t) {
+		counter[char.charCodeAt(0)]++;
 	}
 
 	let left = 0;
@@ -39,7 +41,7 @@ var minWindow = function(s, t) {
             requiredCharCount--;          
         }
         
-        while (requiredCharCount === 0) {
+        while (requiredCharCount === 0 && left <= right) {
 			
             if (right - left + 1 < minLength) {
                 minLength = right - left + 1;
