@@ -4,10 +4,12 @@ function testArray() {
 	const nums = [1, 2, 3, 4, 5, 100];
 
 	console.log(nums.length); // 6
-	nums.forEach((num) => console.log(num));
+	nums.toString();  // "1,2,3,4,5,100"
+	nums.forEach(num => console.log(num));
 	for (const num of nums) {
 		console.log(num);
 	}
+
 
 	nums.push(6); //Add to the last index, nums = [1,2,3,4,5,100,6];
 	nums.pop(); // Removes value at the last index, nums = [1,2,3,4,5,100];
@@ -21,6 +23,7 @@ function testArray() {
 	nums.filter((x) => x > 3); // [4,5]
 	nums.map((x) => x + 1); // [2,3,4,5,6]
 
+	nums.sort((a,b)=>a-b); // sort array
 	nums.includes(2); // true
 	nums.some(x => x >= 5); //true
 	nums.every(x => x >= 5); // false
