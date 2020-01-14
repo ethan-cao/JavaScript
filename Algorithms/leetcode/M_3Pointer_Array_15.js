@@ -13,42 +13,43 @@ A solution set is:
 */
 
 var threeSum = function(nums) {
-    const solutions = [];
+    const solution = [];
     
-    nums.sort((a,b)=>a-b);
+    nums.sort((a,b) => a-b);
     
     for (let left = 0; left < nums.length - 2; ++left) {
-        if (nums[left] + nums[left+1] + nums[left+2] > 0) {
-            break;
-        }
+       
+        if (left > 0 && nums[left] === nums[left-1]) continue;
         
-        if (left > 0 && nums[left] === nums[left-1]) {
-            continue;
-        }
+        if (nums[left] + nums[nums.length-1]*2 < 0)  continue;
         
-        let middle = left + 1;
-        let right = nums.length - 1;
+        if (nums[left] * 3 > 0) break;
+        
+        let middle = left + 1; 
+        let right = nums.length - 1 ;
         
         while (middle < right) {
-            let sum = nums[left] + nums[middle] + nums[right];
-
-            if (sum > 0) {
+            if (nums[left] + nums[middle] + nums[right] > 0) {
+                while(nums[right] === nums[right-1] ) right--;
                 right--;
-            } else if (sum < 0) {
+            } else if (nums[left] + nums[middle] + nums[right] < 0) {
+                while(nums[middle] === nums[middle+1]) middle++;
                 middle++;
             } else {
-                solutions.push([nums[left], nums[middle], nums[right]]);  
-               
-                while (nums[middle] === nums[middle+1] && right + 1 > middle) middle++;
+                solution.push( [nums[left], nums[middle], nums[right]] ); 
+                
+                // move either middle or right to get a different combination
+                
+                while(nums[middle] === nums[middle+1]) middle++;
                 middle++;
                 
-                while (nums[right] === nums[right-1] && right + 1 > middle) right--;
+                while(nums[right] === nums[right-1] ) right--;
                 right--;
             }
-        }
+        }  
     }
-    
-    return solutions;
+     
+    return solution;
 };
 
 threeSum([-1, 0, 1, 2, -1, -4]).forEach(a => console.log(a.toString()));
