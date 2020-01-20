@@ -51,6 +51,39 @@ var deleteDuplicates = function(head) {
 };
 
 
+// 68ms
+var deleteDuplicates = function(head) {
+    if (head === null) {
+        return null;
+    }
+        
+    let virtualHead = new ListNode(head.val-1);
+    virtualHead.next = head;
+    
+    let node = virtualHead;
+    
+    let current = virtualHead;  // no duplicate until current
+    let next = current.next;
+    
+    while (next !== null && next.next != null ) {
+        if (next.val !== current.val && next.val !== next.next.val) {
+            node.next = next;
+            node = node.next;
+        }
+       
+        current = next;
+        next = current.next;
+    }
+    
+    if (current.val !== next.val) {
+        node.next = next;
+        node = node.next;
+    }
+        
+    node.next = null; 
+    
+    return virtualHead.next;
+};
 
 
 
