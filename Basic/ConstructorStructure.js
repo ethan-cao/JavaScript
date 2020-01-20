@@ -15,7 +15,6 @@
      * @extends
      *
      * @param {Object} config  - configuration which is going to be applied
-     *
      */
 
     var constructor = function namespace() {}

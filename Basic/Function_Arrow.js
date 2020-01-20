@@ -1,4 +1,4 @@
-// Arrow function cannot set this with .bind() or .call()
+// Arrow function cannot set this with bind() / call() / apply()
 // Arrow functions cannot be called with new
 
 // Expression, it returns value implicitly 
@@ -26,6 +26,8 @@ console.log((f2(1))) // 3
 
 
 // Lexical this, arguments
+// value of this gets set at the time of the function creation and can't change afterwards
+// the context always stays the same for an arrow function
 function f() {
     this.name = "ethan";
 

@@ -7,6 +7,8 @@ A promise object has a value and status, which could be:
 
 A promise can only be settled once (fulfilled or rejected), subsequent invocation to resolve()/reject()
 does not change the promise (immutability).  
+
+promise help to avoid nested callbacks 
 */
 
 

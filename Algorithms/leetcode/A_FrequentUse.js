@@ -1,4 +1,4 @@
-testString();
+testArray();
 
 function testArray() {
 	const nums = [1, 2, 3, 4, 5, 100];
@@ -6,10 +6,13 @@ function testArray() {
 	console.log(nums.length); // 6
 	nums.toString();  // "1,2,3,4,5,100"
 	nums.forEach(num => console.log(num));
-	for (const num of nums) {
+	for ( let num of nums) {
 		console.log(num);
 	}
 
+	for ( let [index, item] of nums.entries()) {
+		console.log(index + " : " + item);
+	}
 
 	nums.push(6); //Add to the last index, nums = [1,2,3,4,5,100,6];
 	nums.pop(); // Removes value at the last index, nums = [1,2,3,4,5,100];
@@ -76,6 +79,8 @@ function testSet() {
 		.add(3)
 		.add(1);
 
+	set.has(2); // false;
+
 	console.log("size: ", set.size); // 3
 
 	for (let item of set.values()) {
@@ -83,7 +88,6 @@ function testSet() {
 	}
 
 	set.delete(2);
-	console.log(set.has(2)); // false;
 }
 
 function testMap() {

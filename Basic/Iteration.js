@@ -1,31 +1,39 @@
 /**
-  The for...in statement iterates over the enumerable properties of an object, in an arbitrary order.
-  The for...of statement iterates over values that the iterable object defines to be iterated over.
+  for...in iterates over the enumerable properties of an object, including inherited properties, in an arbitrary order.
+    use obj.hasOwnProperty(property) to check if property is inherited 
+
+  for...of iterates over values that the iterable object defines to be iterated over, e.g.. Array, String, Map, Set
+    
  */
 
 Object.prototype.objCustom = function() {}; 
 Array.prototype.arrCustom = function() {};
 
-let iterable = [3, 5, 7];
-iterable.foo = 'hello';
+let array = [3, 5, 7];
+array.foo = 'hello';
 
 // for...in is built for iterating enumerable properties, not recommended to use with arrays
 // applicable for Array, Map, String, Set, arguments
-for (let i in iterable) {
+for (let i in array) {
   console.log(i); // 0, 1, 2, "foo", "arrCustom", "objCustom"
 }
 
-for (let i in iterable) {
-  if (iterable.hasOwnProperty(i)) {
+for (let i in array) {
+  if (array.hasOwnProperty(i)) {
     console.log(i); // logs 0, 1, 2, "foo"
   }
 }
 
 
 // Use for...of to iterate array instead
-for (let i of iterable) {
+for (let i of array) {
   console.log(i); // 3, 5, 7
 }
+
+for (let [index, item] of array.entries()) {
+  console.log(index, " : ", item);
+}
+
 
 var myMap = new Map();
 myMap.set(0, "zero");

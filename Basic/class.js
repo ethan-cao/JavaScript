@@ -1,3 +1,5 @@
+// ES6 function constructors
+// equalvalent to ES5 function Shape(name) {}
 class Shape {
   constructor(id, x, y) {
     this.id = id;
