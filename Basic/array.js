@@ -6,9 +6,7 @@ var [a, , b = 3, rest] = data; // b has default value
 // a = 1, b = 3, rest = [4, 5]
 console.log("before : " + a + " - " + b);
 
-[b, a] = [a, b]; // exchange value of a and b
-console.log("after: " + a + " - " + b);
-// a = 3, b = 1
+
 
 // Array deconstructing 
 var [head, ...tail] = [1, 2, 3, 4];
@@ -18,7 +16,10 @@ console.log(tail); // [2, 3, 4]
 var [, , third] = ["foo", "bar", "baz"];
 console.log(third); // "baz"
 
+[b, a] = [a, b]; // swap a, b
 
-// Spread syntax
+
+
+// Array spread
 const numbers = [1, 2, 3];
 console.log("spread: ", ...numbers);

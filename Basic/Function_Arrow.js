@@ -1,5 +1,6 @@
+// Arrow function' context is set during function creaion only 
 // Arrow function cannot set this with bind() / call() / apply()
-// Arrow functions cannot be called with new
+// Arrow function cannot be called with new
 
 // Expression, it returns value implicitly 
 let f1 = x => x + 1;  

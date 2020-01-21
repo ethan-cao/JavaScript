@@ -4,9 +4,16 @@ const o = {
     c: 3
 };
 
-// Destructuring, define variable a, b,c and their value equals to value that has the same key in object o;
+// Object destructuring, define variable a, b,c and their value equals to value that has the same key in object o;
 const {a, b, c} = o;
 // a = 1,  b = 2, c = 3;
+
+// Object spread
+const person = {
+  name: 'Todd',
+  age: 29,
+};
+const copyOfTodd = { ...person };  //  copyOfTodd = {name: "Todd", age: 29}
 
 var x = 0;
 var f = x => x;

@@ -1,75 +1,62 @@
-
 /*
-Given a singly linked list, group all odd nodes together followed by the even nodes.
-Please note here we are talking about the node number and not the value in the nodes.
-
-do it in place, with time: O(N) and space: O(1)
-
-The relative order inside both the even and odd groups should remain as it was in the input.
-The first node is considered odd, the second node even and so on
+Given a linked list, remove the n-th node from the end of list and return its head.
+Given n will always be valid.
 
 ### Example
-1->2->3->4->5->NULL -> 1->3->5->2->4->NULL
-2->1->3->5->6->4->7->NULL -> 2->3->6->7->1->5->4->NULL
+1->2->3->4->5, and n = 2.
+After removing the second node from the end, the linked list becomes 1->2->3->5.
+
+1->2, and n = 1
+1
 
 */
 
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
+("use strict");
 
-"use strict";
+let idx = 0;
 
-// 64ms
-var oddEvenList = function(head) {
-    if (head === null || head.next === null) {
-        return head;
-    }
-    
-    const evenHead = head.next;
-    
-    let odd = head;
-    let even = odd.next;
-    
-    while (odd.next !== null && even.next !== null) {
-        odd.next = odd.next.next;     
-        even.next = even.next.next;
-        
-        odd = odd.next;
-        even = even.next;
-    }
-    
-    odd.next = evenHead;
-    
-    return head;
+const visitNext = (previous, current, n) => {
+	if (current === null) {
+		return;
+	}
+
+	visitNext(current, current.next, n);
+	idx++;
+
+	if (idx === n) {
+		if (previous === null) {
+			current.val = null;
+		} else {
+			previous.next = current.next;
+		}
+	}
+};
+
+let removeNthFromEnd = function(head, n) {
+	visitNext(null, head, n);
+
+	return head.val === null ? head.next : head;
 };
 
 
-// 56ms
-const splitList = (head, odd, even) => {
-    if (even === null || even.next === null) {
-        return head;
+// 52ms
+let removeNthFromEnd = function(head, n) {
+    const virtualHead = new ListNode(0);
+    virtualHead.next = head;
+    
+    let left = virtualHead; 
+    let right = virtualHead;
+    
+    for (let i = 0; i <= n; ++i) {
+        right = right.next;
     }
     
-    let nextOdd = even.next; 
-    let nextEven = nextOdd.next;
-    
-    nextOdd.next = odd.next;
-    
-    odd.next = nextOdd;
-    even.next = nextEven;
-    
-    return splitList(head, nextOdd, nextEven);
-};
+    while (right!== null) {
+        left = left.next;
+        right = right.next;
+    }
+     
+    left.next = left.next.next;
 
-var oddEvenList = function(head) {
-    if (head === null || head.next === null) {
-        return head;
-    }
-    
-    return splitList(head, head, head.next);
+    return virtualHead.next;
 };
