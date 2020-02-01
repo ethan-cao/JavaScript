@@ -13,7 +13,7 @@ f1 = (x, y) => 1; // () is only required for multiple params
 console.log(f1(1));  // 1
 
 // rest parameter ... represens an indefinite number of arguments as an array
-// args is an array
+// args.__proto__ === Array.prototype  true
 f1 = (...args) => args.length;
 console.log("args length : ",  f1(1,2,3));  // 3
 

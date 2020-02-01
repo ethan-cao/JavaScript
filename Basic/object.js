@@ -13,7 +13,7 @@ const person = {
   name: 'Todd',
   age: 29,
 };
-const copyOfTodd = { ...person };  //  copyOfTodd = {name: "Todd", age: 29}
+const copyOfTodd = { ...person };  //  copyOfTodd = name: "Todd", age: 29}
 
 var x = 0;
 var f = x => x;

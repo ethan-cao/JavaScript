@@ -11,6 +11,7 @@ let newF = bind(f, {name: "Ethan"});
 newF();  // Ethan
 
 
+
 /*--------------------------------------------------------------------------------------------
 Create a function pipe that performs left-to-right function composition by returning a function that accepts 1 argument
 const square = v => v * v
@@ -20,38 +21,36 @@ const res = pipe(square, double, addOne)
 res(3) // 19;   addOne(double(square(3)))
 */
 
+// reduce( (accumulator, currentValue, currentIndex, array) => {}, initialValue);
 const pipe = (...fxs) => (result = 0) => fxs.reduce((accumulator, fx) => fx(accumulator), result);
 
-// reduce( (accumulator, currentValue, currentIndex, array) => {}, initialValue);
 
 
 /*--------------------------------------------------------------------------------------------
 make this work : duplicate([1, 2, 3, 4, 5]); // [1,2,3,4,5,1,2,3,4,5]
 */
 
-const duplicate1 = function(arr) {
-	return arr.concat(arr);
-}
-
+const duplicate1 = arr => arr.concat(arr);
 const duplicate2 = arr => [...arr, ...arr];
 
 
+
 /*--------------------------------------------------------------------------------------------
- Create a for loop that iterates up to 100 while outputting 
-  "fizz" at multiples of 3, 
-  "buzz" at multiples of 5 
-  "fizzbuzz" at multiples of 3 and 5
+Create a for loop that iterates up to 100 while outputting 
+"fizz" at multiples of 3, 
+"buzz" at multiples of 5 
+"fizzbuzz" at multiples of 3 and 5
 */
 const fizzbuzz = () => {
   const FIZZ = "fizz";
   const BUZZ = "buzz";
-
+  
   for (let i = 1; i <= 100; ++i) {
-	  const fizz = (i % 3 === 0);
+    const fizz = (i % 3 === 0);
     const buzz = (i % 5 === 0);
-
+    
     let output = null;
-
+    
     if (fizz && buzz) {
       output = FIZZ + BUZZ;
     } else if (fizz ) {
@@ -59,105 +58,185 @@ const fizzbuzz = () => {
     } else if (buzz) {
       output = BUZZ;
     }
-
+    
     if (output !== null) {
       console.log(i + " : " + output);
     }
   }
 }
 
-
 /*--------------------------------------------------------------------------------------------
-create a function which can currry a function
+create a function which can curry a function
 */
-function curry(fn) {
-  if (fn.length === 0) {
-    return fn;
-  }
+const add = (a, b) => a + b;
 
-  function _curried(depth, args) {
-    return function(newArgument) {
-      if (depth - 1 === 0) {
-        return fn(...args, newArgument);
-      }
-      return _curried(depth - 1, [...args, newArgument]);
-    };
-  }
+function curry(fx) {
+	if (fx.length === 0){
+		return;
+	} 
 
-  return _curried(fn.length, []);
+	/* ...rest parameter */		
+	const __curry = function(arity, ...args) {
+		return function(__arg) {
+			if (arity === 1) {
+				/* ...spread */					
+				return fx(...args, __arg);
+			} else {
+				/* ...spread */				
+				return __curry(arity-1, ...args, __arg);
+			}
+		}
+	}
+
+	return __curry(fx.length);
 }
 
-function add(a, b) {
-  return a + b;
+// simplied version
+function curry(fx) {
+	if (fx.length === 0) return;
+
+	const __curry = (arity, ...args) => (__arg) => arity === 1 ? fx(...args, __arg): __curry(arity - 1, ...args, __arg);
+
+	return __curry(fx.length);
 }
 
 var curriedAdd = curry(add);
 var addFive = curriedAdd(5);
 
-var result = [0, 1, 2, 3, 4, 5].map(addFive); // [5, 6, 7, 8, 9, 10]o
+addFive(3); // 8
+[0, 1, 2, 3, 4, 5].map(addFive); // [5, 6, 7, 8, 9, 10]
+
+
+
+function curry1(fn, ...args) {
+    return (..._arg) => {
+        return fn(...args, ..._arg);
+    }
+}
+
+var curriedAdd1 = curry1(add, 3, 4);
+curriedAdd1(); // 7
+
+
 
 
 /*--------------------------------------------------------------------------------------------
 Shallow copy
 */
-// Using the object spread operator ..., the object's own enumerable properties can be copied into the new object. This creates a shallow clone of the object.
-// prototypes are ignored. and, nested objects are not cloned, but rather their references get copied, so nested objects still refer to the same objects as the original. Deep-cloning is much more complex in order to effectively clone any type of object (Date, RegExp, Function, Set, etc) that may be nested within the object.
-const obj = { a: 1, b: 2 }
-const shallowClone = { ...obj }
+
+// Using the object spread operator ..., the object's own enumerable properties can be copied into the new object. 
+// prototypes are ignored. and, nested objects are not cloned, but rather their references get copied, 
+// so nested objects still refer to the same objects as the original. 
+const obj = {a: 1, b: 2};
+const shallowClone1 = {...obj};
+const shallowClone2 = Object.assign({}, obj); 
+
 
 
 /*--------------------------------------------------------------------------------------------
 Deep copy
- */
-// deep-clone a simple object, CPU-intensive and only accepts valid JSON
-JSON.parse(JSON.stringify(obj));
-
-
-/*--------------------------------------------------------------------------------------------
-It accepts two objects as arguments: the first object is the recipe
-for the food, while the second object is the available ingredients.
-Each ingredient's value is a number representing how many units there are.
-
-`batches(recipe, available)`
-
-// 0 batches can be made
-batches(
-    { milk: 100, butter: 50, flour: 5 },
-    { milk: 132, butter: 48, flour: 51 }
-  )
-  batches(
-    { milk: 100, flour: 4, sugar: 10, butter: 5 },
-    { milk: 1288, flour: 9, sugar: 95 }
-  )
-  
-  // 1 batch can be made
-  batches(
-    { milk: 100, butter: 50, cheese: 10 },
-    { milk: 198, butter: 52, cheese: 10 }
-  )
-  
-  // 2 batches can be made
-  batches(
-    { milk: 2, sugar: 40, butter: 20 },
-    { milk: 5, sugar: 120, butter: 500 }
-  )
 */
 
-const batches = (recipe, available) =>
-  Math.floor(
-    Math.min(...Object.keys(recipe).map(k => available[k] / recipe[k] || 0))
-  )
+// deep-clone a simple object (without complex type like Dates, functions, undefined, Infinity, RegExps, Maps, Sets, Blobs, FileLists, ImageDatas, sparse Arrays, Typed Arrays)
+// CPU-intensive and only accepts valid JSON
+JSON.parse(JSON.stringify(obj));
 
-/*--------------------------------------------------------------------------------------------
-Debounce
- */
+// external lib
+_.cloneDeep(obj);
 
-
-/*--------------------------------------------------------------------------------------------
-Throttle
- */
 
 
 /*--------------------------------------------------------------------------------------------
-Pomise 
- */
+Create a batches function  `batches(recipe, available)`
+1st param is the recipe for the food, 2nd param is the available ingredients.
+Each ingredient's value is a number representing how many units there are.
+
+// 0 batches can be made
+batches( { milk: 100, butter: 50, flour: 5 }, { milk: 132, butter: 48, flour: 51 } )
+// 2 batches can be made
+batches(  { milk: 2, sugar: 40, butter: 20 }, { milk: 5, sugar: 120, butter: 500 } )
+*/
+
+const batches = (recipe, available) => Math.floor(Math.min(
+  ... Object.keys(recipe).map(k => available[k]/recipe[k])
+));
+
+
+
+/*--------------------------------------------------------------------------------------------
+Throttle: within a time scope, invoke a function at most once (0 or 1)
+*/
+function throttle1(fx, timeScope) {
+	return function(){
+		let lastInvocation = null;
+		let invoked = false;
+
+		return (function(...args) {
+			let now = Date.now();
+			let elapse = lastInvocation === null ? Number.MAX_VALUE : now - lastInvocation;
+			
+			if (elapse <= timeScope){
+				if (!invoked) {
+					fx(...args);
+					lastInvocation = now;
+					invoked = true;
+				}
+			} else {
+				fx(...args);
+				lastInvocation = now;
+				invoked = true;
+			}
+		})()
+	}
+}	
+
+const throttle = (fx, timeScope) => {
+	let lastFunc;
+	let lastInvocation;
+
+	return function() {
+	  const context = this
+	  const args = arguments
+
+	  if (!lastInvocation) {
+		fx(args);
+		lastInvocation = Date.now()
+	  } else {
+		clearTimeout(lastFunc)
+
+		lastFunc = setTimeout(function() {
+		  if ((Date.nw() - lastInvocation) >= timeScope) {
+			fx(args);
+			lastInvocation = Date.now()
+		  }
+		}, timeScope - (Date.now() - lastInvocation))
+	  }
+	}
+  }
+	
+const fx = function() {return "called";}   // CANNOT USE rambda
+const newFx = throttle(fx, 5000); // 5000 milisecond, 5s
+
+newFx(); // called
+newFx();
+
+
+/*--------------------------------------------------------------------------------------------
+Debounce: within a time scope, invoke a function only once  (1)
+*/
+function debounce(fx, time) {
+    let now = Date.now();
+
+    return 
+}
+
+
+
+
+
+/*--------------------------------------------------------------------------------------------
+Promise
+*/
+
+
+

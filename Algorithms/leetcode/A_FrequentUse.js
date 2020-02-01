@@ -4,7 +4,9 @@ function testArray() {
 	const nums = [1, 2, 3, 4, 5, 100];
 
 	console.log(nums.length); // 6
-	nums.toString();  // "1,2,3,4,5,100"
+
+	console.log(nums);  // "1,2,3,4,5,100"
+	nums.toString();    // "1,2,3,4,5,100"
 	nums.forEach(num => console.log(num));
 	for ( let num of nums) {
 		console.log(num);
@@ -21,12 +23,11 @@ function testArray() {
 	nums.shift(); //remove value at the first index, nums = [1,2,3,4,5,100];
 	// The default sort order is built upon converting the elements into strings,
 	nums.sort(); // [1, 100, 2, 3, 4, 5]
-	nums.sort((a, b) => a - b); //  [1,2,3,4,5,100];
+	nums.sort((a, b) => a - b); // // sort array: [1,2,3,4,5,100];
 
 	nums.filter((x) => x > 3); // [4,5]
 	nums.map((x) => x + 1); // [2,3,4,5,6]
 
-	nums.sort((a,b)=>a-b); // sort array
 	nums.includes(2); // true
 	nums.some(x => x >= 5); //true
 	nums.every(x => x >= 5); // false
@@ -51,7 +52,6 @@ function testArray() {
 	// new Array() and Array() produce the same result
 	let oneDArray = new Array(3).fill(0);
 	let twoDArray = new Array(3).fill(0).map(x => Array(3).fill(0)); // 10% slower than using loop
-
 }
 
 function testString() {

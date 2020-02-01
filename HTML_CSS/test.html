@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+        <div id="emails-editor"></div>
+		<script src="emails-editor.js"></script>
+		<script>
+			// EmailsEditor will be added in the container
+			const container = document.querySelector("#emails-editor");
+
+			// options contains the name of the board and emails to display
+			const options1 = {
+				boardName: "Board name",
+				emails: ["john@miro.com"]
+			};
+			const form1 = EmailsEditor({ container, ...options1 });
+
+			/* user can create multiple form by calling
+ 		        const form2 = EmailsEditor({ container, ...options2 });
+ 		        const form3 = EmailsEditor({ container, ...options3 });
+            */
+		</script>
+	</body>
 </html>

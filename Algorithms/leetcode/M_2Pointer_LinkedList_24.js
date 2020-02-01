@@ -16,40 +16,46 @@ You may not modify the values in the list's nodes, only nodes itself may be chan
 
 // 48ms
 var swapPairs = function(head) {
-    let newHead = null;
-    
-    if (head === null) {
-        return newHead;
+    if (head === null || head.next === null ) {
+        return head;
     }
     
-    newHead = head.next ? head.next : head;    
-
-    let current = head;
-    let next = current.next;
+    let virtualHead = new ListNode(0);
+    virtualHead.next = head.next;
     
-    while (current !== null && next !== null) {
-        let nextNext = next.next;
+    let odd = head; 
+    let even = head.next;
+    
+    while (odd !== null && even !== null) {
+        let nextOdd = even.next;
+        let nextEven = nextOdd === null ? null : nextOdd.next;
         
-        next.next = current;
-        current.next = nextNext && nextNext.next ? nextNext.next : nextNext;
-        
-        current = nextNext;
-        next = current ? current.next : null;
+        even.next = odd;
+        odd.next = nextEven === null ? nextOdd : nextEven;
+       
+        odd = nextOdd;
+        even = nextEven;
     }
-     
-    return newHead;
+    
+    return virtualHead.next;
 }
 
-// 48ms
+// 52ms
+const swap = (odd, even) => {
+    if (odd === null || even === null) {
+        return odd;
+    }
+    
+    odd.next = swap(even.next, even.next === null ? null : even.next.next);
+    even.next = odd;
+    
+    return even;
+};
+
 var swapPairs = function(head) {
     if (head === null || head.next === null) {
         return head;
-    }    
-
-    let next = head.next;
+    }
     
-    head.next = swapPairs(next.next);
-    next.next = head;
-     
-    return next;
+    return swap(head, head.next);
 };

@@ -20,34 +20,34 @@ leaving only distinct numbers from the original list.
 
 // 56ms
 var deleteDuplicates = function(head) {
-	if (head === null) {
-		return null;
-	}
-
-	const virtualHead = new ListNode(head.val - 1);
-	virtualHead.next = head;
-
-	let current = virtualHead;
-	let next = current.next;
-
-	while (next !== null && next.next !== null) {
-		let skip = false;
-
-		while (next.next !== null && next.val === next.next.val) {
-			next.next = next.next.next;
-			skip = true;
-		}
-
-		if (skip) {
-			current.next = next.next;
-		} else {
-			current = next;
-		}
-
-		next = current === null ? null : current.next;
-	}
-
-	return virtualHead.next;
+    if (head === null) {
+        return null;
+    }
+        
+    let virtualHead = new ListNode(head.val-1);
+    virtualHead.next = head;
+    
+    let current = virtualHead;
+    let next = current.next;
+    
+    while (next !== null) {
+        let skip = false;
+        
+        while (next.next !== null && next.val === next.next.val) {
+            skip = true;
+            next = next.next;         
+        }
+        
+        if (skip) {
+            current.next = next.next;
+        } else {
+            current = next;
+        }
+        
+        next = current.next;
+    }
+    
+    return virtualHead.next;
 };
 
 
@@ -88,12 +88,12 @@ var deleteDuplicates = function(head) {
 
 
 // 56ms
-const getUniqueNodes = (previous, current) => {
+const getUniqueNodes = (current, next) => {
     if (current === null) {
         return null;
     }
     
-    if (previous !== null && previous.val === current.val || current.next !== null && current.next.val === current.val) {
+    if (current !== null && current.val === current.val || current.next !== null && current.next.val === current.val) {
         return getUniqueNodes(current, current.next) ;
     } else {
         current.next = getUniqueNodes(current, current.next);
