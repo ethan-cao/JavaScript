@@ -1,5 +1,11 @@
 testArray();
 
+function testNumber() {
+	let left = 0;
+	let right = 10;
+	const middle = Math.floor(left + (right - left) / 2);
+}
+
 function testArray() {
 	const nums = [1, 2, 3, 4, 5, 100];
 
@@ -8,7 +14,7 @@ function testArray() {
 	console.log(nums);  // "1,2,3,4,5,100"
 	nums.toString();    // "1,2,3,4,5,100"
 	nums.forEach(num => console.log(num));
-	for ( let num of nums) {
+	for ( let num of nums ) {
 		console.log(num);
 	}
 
@@ -52,6 +58,11 @@ function testArray() {
 	// new Array() and Array() produce the same result
 	let oneDArray = new Array(3).fill(0);
 	let twoDArray = new Array(3).fill(0).map(x => Array(3).fill(0)); // 10% slower than using loop
+
+	// swap 2 value, Destructuring Assignment Array Matching
+	let a = 5, b = 6;
+	[a, b] = [b, a];
+	const swap = (nums, a, b) => { [nums[a], nums[b]] = [nums[b], nums[a]]; };
 }
 
 function testString() {
@@ -68,7 +79,6 @@ function testString() {
 	s.split("_"); // ["test", "text"]
 	s.substring(0, s.length - 2); //cut last 2 char:
 	s.charCodeAt(0); // asc2 code for the 1st char
-
 }
 
 function testSet() {

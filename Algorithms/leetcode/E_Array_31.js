@@ -12,56 +12,48 @@ the given sequence is 123, the next lexicographically greater permutation is 132
 
 3,2,1 → 1,2,3 :  3,2,1 is the last permutation, so return the 1st one  1,2,3
 1,1,5 → 1,5,1
-
 */
 
+const swap = (nums, a, b) => { [nums[a], nums[b]] = [nums[b], nums[a]]; };
 
-const swap = (nums, a, b) => {
-    let temp = nums[a];
-    nums[a] = nums[b];
-    nums[b] = temp;
-};
-
-const sort = (nums, idx) => {
-    if (idx <= 0) {
-        nums.sort((a,b)=> a-b);
-        return;
-    }
-    
-    for (let i = idx + 1; i < nums.length - 1; ++i) {
-        
-        for (let j = i + 1; j < nums.length; ++j) {
-            if (nums[i] > nums[j]) {
-                swap(nums, i, j);
-            }
-        }
-    }
+const reverse = (nums, i = 0, j = nums.length - 1) => {
+	while (i < j) {
+		swap(nums, i, j);
+		i++;
+		j--;
+	}
 };
 
 var nextPermutation = function(nums) {
-    for (let i = nums.length - 1; i >= 0 ; --i) {
-        let num = nums[i];
-        
-        let j = i - 1;
-        while (j >= 0 && nums[j] >= num) {
-            j--;        
-        }
-        
-        let leftSmallerNum = j >= 0 ? nums[j] : null;
-          
-        if (leftSmallerNum !== null) {
-            swap(nums, i, j);            
-            sort(nums, j);
-            return;
-        }
-        
-        if (i === 0 && leftSmallerNum === null) {
-            sort(nums, -1);
-        }
-    }
-     
+	if (!nums || nums.length < 2) {
+		return;
+	}
+
+	let turningPointIdx = null;
+	for (let i = nums.length - 1; i > 0; --i) {
+		if (nums[i - 1] < nums[i]) {
+			turningPointIdx = i - 1;
+			break;
+		}
+	}
+
+	if (turningPointIdx === null) {
+		reverse(nums);
+	} else {
+		let replacementIdx = null;
+		for (let i = nums.length - 1; i > turningPointIdx; --i) {
+			if (nums[i] > nums[turningPointIdx]) {
+				replacementIdx = i;
+				break;
+			}
+		}
+		swap(nums, turningPointIdx, replacementIdx);
+		reverse(nums, turningPointIdx + 1, nums.length - 1);
+	}
 };
 
-const nums = [1,3,2];
+// const nums = [1, 3, 2];    // 2,1,3
+// const nums = [1, 4, 6, 66, 23, 21, 0];  // 1,4,21,0,6,23,66
+const nums = [4, 2, 0, 2, 3, 2, 0]; // [4,2,0,3,0,2,2]
 nextPermutation(nums);
 console.log(nums);

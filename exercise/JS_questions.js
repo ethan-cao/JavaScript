@@ -11,7 +11,6 @@ let newF = bind(f, {name: "Ethan"});
 newF();  // Ethan
 
 
-
 /*--------------------------------------------------------------------------------------------
 Create a function pipe that performs left-to-right function composition by returning a function that accepts 1 argument
 const square = v => v * v
@@ -32,8 +31,6 @@ make this work : duplicate([1, 2, 3, 4, 5]); // [1,2,3,4,5,1,2,3,4,5]
 
 const duplicate1 = arr => arr.concat(arr);
 const duplicate2 = arr => [...arr, ...arr];
-
-
 
 /*--------------------------------------------------------------------------------------------
 Create a for loop that iterates up to 100 while outputting 
