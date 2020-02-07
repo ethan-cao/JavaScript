@@ -8,6 +8,8 @@ const o = {
 const {a, b, c} = o;
 // a = 1,  b = 2, c = 3;
 
+console.log("a in o : " + ("a" in o)); // true
+
 // Object spread
 const person = {
   name: 'Todd',

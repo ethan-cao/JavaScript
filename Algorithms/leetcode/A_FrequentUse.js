@@ -1,5 +1,14 @@
 testArray();
 
+function testObject() {
+	const o1 = {
+		a : 1,
+		b: 2
+	}
+
+	console("a" in o); // true
+}
+
 function testNumber() {
 	let left = 0;
 	let right = 10;
