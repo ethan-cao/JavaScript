@@ -1,16 +1,7 @@
-function curry(fx) {
-	if (fx.length === 0){
-		return;
-	} 
 
-	/* ...rest parameter */		
-	/* ...spread */				
-	const __curry = (arity, ...args) => 
-					(__arg) => arity === 1 ? fx(...args): __curry(arity - 1, ...args, __arg);
+const nums = [1, 2, 3, 4, 5];
 
-	return __curry(fx.length);
-}
+console.log(nums.reduce((a, b)=> a+b, 5));
 
 
-var add = (a, b) => a+b;
-var curriedAdd = curry(add);
+console.log(...nums)

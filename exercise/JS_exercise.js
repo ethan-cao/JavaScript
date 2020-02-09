@@ -28,9 +28,10 @@ const pipe = (...fxs) => (result = 0) => fxs.reduce((accumulator, fx) => fx(accu
 /*--------------------------------------------------------------------------------------------
 make this work : duplicate([1, 2, 3, 4, 5]); // [1,2,3,4,5,1,2,3,4,5]
 */
-
 const duplicate1 = arr => arr.concat(arr);
 const duplicate2 = arr => [...arr, ...arr];
+
+
 
 /*--------------------------------------------------------------------------------------------
 Create a for loop that iterates up to 100 while outputting 
@@ -118,7 +119,7 @@ curriedAdd1(); // 7
 
 
 /*--------------------------------------------------------------------------------------------
-Shallow copy
+Shallow copy object
 */
 
 // Using the object spread operator ..., the object's own enumerable properties can be copied into the new object. 
@@ -131,7 +132,7 @@ const shallowClone2 = Object.assign({}, obj);
 
 
 /*--------------------------------------------------------------------------------------------
-Deep copy
+Deep copy object
 */
 
 // deep-clone a simple object (without complex type like Dates, functions, undefined, Infinity, RegExps, Maps, Sets, Blobs, FileLists, ImageDatas, sparse Arrays, Typed Arrays)

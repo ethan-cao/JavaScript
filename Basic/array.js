@@ -1,25 +1,84 @@
-// deconstructing, array matching
-// extract data[0] to a, data[2] to b
-var data = [1, 2, 3, 4, 5];
-// we can also var a, b outside
-var [a, , b = 3, rest] = data; // b has default value
-// a = 1, b = 3, rest = [4, 5]
-console.log("before : " + a + " - " + b);
+// new Array() and Array() produce the same result
+const oneDimensionArray = new Array(128).fill(0);
+let twoDimensionDArray = Array(3).fill(0).map((x) => Array(3).fill(0)); // 10% slower than loop
+console.log(oneDimensionArray.length); // 128
+
+Array.isArray([]); // true
+
+const nums = [1, 2, 3, 4, 5, 100];
+
+console.log(nums); 				// [ 1, 2, 3, 4, 5, 100 ]
+console.log(nums.toString());   // [ 1, 2, 3, 4, 5, 100 ]
+console.log(...nums);           // 1, 2, 3, 4, 5, 100
+
+nums.forEach(num => console.log(num));
+
+for (let num of nums) {
+	console.log(num);
+}
+
+for (let [index, item] of nums.entries()) {
+	console.log(index + " : " + item);
+}
+
+
+nums.push(6); //Add to the last index, nums = [1,2,3,4,5,100,6];
+nums.pop(); // Removes value at the last index, nums = [1,2,3,4,5,100];
+
+nums.unshift(0); //Add to the first index, nums = [0,1,2,3,4,5,100];
+nums.shift(); //remove value at the first index, nums = [1,2,3,4,5,100];
+
+nums.includes(2); // true
+nums.some(x => x >= 5); //true,      at least 1 element meets the condition
+nums.every((x) => x >= 5); // false, all element meets the condition
+
+nums.filter(x => x > 3); // [4,5]
+nums.map(x => x + 1); // [2,3,4,5,6]
+nums.reduce((a, b) => a + b, 5); // 20
+// reduce( (accumulator, currentValue) => accumulator + currentValue, initialValue))))
+
+
+// batch add/remove elements
+// array.splice(start[, deleteCount[, itemToAdd1[, itemToAdd2[, ...]]]])
+nums.splice(i, 1);  // // remove an element by index, nums: [ 1, 3, 4, 5, 100 ]
+nums.splice(0, 0, -1, 0); // nums : [-1,0,1,2,3,4,5,100]
+nums.splice(0, 2); // nums: [1,2,3,4,5,100]
+
+
+// shallow copy
+var newArray = nums.slice();     
+var newArray = [] = [...a];
+var newArray = nums.slice(0, 5); // copy the array from 0 til 4
+
+// tranform array-like or iterable into true array
+var newArray = Array.from("char"); // ["c", "h", "a", "r"]
+// create array from every arguments
+var newArray = Array.of(1, 2, 3, 4, 5, 6); //  [1, 2, 3, 4, 5, 6]
+
+// merge array
+var newArray = [].concat(a).concat(b);
+var newArray = [...a, ...b];
+[].push.apply(a, b);
+
+
+// swap 2 value, Destructuring Assignment Array Matching
+a = 5;
+let b = 6;
+
+[a, b] = [b, a];
+const swap = (nums, a, b) => {
+	[nums[a], nums[b]] = [nums[b], nums[a]];
+};
+
+
+// The default sort order is built upon converting the elements into strings,
+nums.sort(); // [1, 100, 2, 3, 4, 5]
+nums.sort((a, b) => a - b); // // sort array: [1,2,3,4,5,100];
 
 
 
-// Array deconstructing 
-var [head, ...tail] = [1, 2, 3, 4];
-console.log(head); // 1
-console.log(tail); // [2, 3, 4]
+// Array deconstructing
+var [head, ...tail] = [1, 2, 3, 4, 5];     // head = 1, tail = [2,3,4,5]
+var [head, tail] = [1, 2, 3, 4, 5];        // head = 1, tail = 2
+var [a, , b = 10, rest] = [1, 2, 3, 4, 5];  // a = 1, b = 3, rest = 4
 
-var [, , third] = ["foo", "bar", "baz"];
-console.log(third); // "baz"
-
-[b, a] = [a, b]; // swap a, b
-
-
-
-// Array spread
-const numbers = [1, 2, 3];
-console.log("spread: ", ...numbers);
