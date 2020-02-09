@@ -307,29 +307,57 @@ function debounce(func, wait, options) {
 }
 
 
+// {leading: false, trailing: true}
+function debounce(fx, timeout) {
+	let timer = null;
 
-function debounce(func, wait, leading) {
-	let timer;
+	let context = this
+	let args = arguments
 
+	const execute = function () {
+		fx.apply(context, args);
+	}
+  
+	return function () {
+	  context = this
+	  args = arguments
+  
+	  clearTimeout(timer)
+  
+	  timer = setTimeout(execute, timeout)
+	}
+  }
+
+// immediate:false - {leading: false, trailing: true}
+// immediate:true -  {leading: true, trailing: false}
+function debounce(fx, timeout, immediate) {
+	let timer = null;
+
+	let context = null;
+	let args = null;
+
+	const execute = function () {
+		fx.apply(context, args);
+	}
+	
 	return function() {
-		let context = this;
-		let args = arguments;
-		let callNow = leading && !timer;
+		context = this;
+		args = arguments;
 
-		const delayedCall = function() {
-			timer = null;
-
-			if (!leading) {
-				func.apply(context, args);
-			}
-		};
+		const callNow = immediate || !timer; // leading or 1st call
 
 		clearTimeout(timer);
 
-		timer = setTimeout(delayedCall, wait);
+		timer = setTimeout(function() {
+			timer = null;
+
+			if (!immediate) {
+				execute();
+			}
+		}, timeout);
 
 		if (callNow) {
-			func.apply(context, args);
+			execute();
 		}
 	};
 }
@@ -338,54 +366,6 @@ function debounce(func, wait, leading) {
 /*--------------------------------------------------------------------------------------------
 Throttle: within a time scope, invoke a function at most once (0 or 1)
 */
-function throttle1(fx, wait) {
-	return function(){
-		let lastInvocation = null;
-		let invoked = false;
-
-		return (function(...args) {
-			let now = Date.now();
-			let elapse = lastInvocation === null ? Number.MAX_VALUE : now - lastInvocation;
-			
-			if (elapse <= wait){
-				if (!invoked) {
-					fx(...args);
-					lastInvocation = now;
-					invoked = true;
-				}
-			} else {
-				fx(...args);
-				lastInvocation = now;
-				invoked = true;
-			}
-		})()
-	}
-}	
-
-const throttle = (fx, timeScope) => {
-	let lastFunc;
-	let lastInvocation;
-
-	return function() {
-		const context = this;
-		const args = arguments;
-
-		if (!lastInvocation) {
-			fx(args);
-			lastInvocation = Date.now();
-		} else {
-			clearTimeout(lastFunc);
-
-			lastFunc = setTimeout(function() {
-				if (Date.nw() - lastInvocation >= timeScope) {
-					fx(args);
-					lastInvocation = Date.now();
-				}
-			}, timeScope - (Date.now() - lastInvocation));
-		}
-	};
-};
-
 // Lodash 4.17.15 implementation 
 function throttle(func, wait, options) {
 	var leading = true,
@@ -408,18 +388,36 @@ function throttle(func, wait, options) {
 	});
 }
 
-const fx = function() {return "called";}   // CANNOT USE rambda
-const newFx = throttle(fx, 5000); // 5000 milisecond, 5s
+// {leading: false, trailing: true}
+function throttle(fx, timeout) {
+	let timer;
+	let lastCall;
 
-newFx(); // called
-newFx();
+	let context = this;
+	let args = arguments;
 
+	const execute = function () {
+		lastCall = Date.now();
+		fx.apply(context, args);
+	}
 
+	return function() {
+		context = this;
+		args = arguments;
 
+		const now = Date.now();
+		const remaining = lastCall ? lastCall + timeout - now : 0;
+
+		if (remaining > 0) {
+			clearTimeout(timer);
+			timer = setTimeout(execute, remaining);
+		} else {
+			execute();
+		}
+	};
+}
 
 /*--------------------------------------------------------------------------------------------
 Promise
 */
-
-
 
