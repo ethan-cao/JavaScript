@@ -9,7 +9,7 @@ executing generator: When iterator's next() is called, the generator fx body is 
     the first yield expression finish
     or with yield*, delegates to another generator function
 
-yield ___ is called a "yield expression", when restart generator, a value back in will be the computed result of that yield ___ expression.
+yield XXX; is called a "yield expression", when restart generator, a value back in will be the computed result of that yield ___ expression.
 
 pass value in  : paramater in next(), replace the pausing yield expression
 pass value out : yield expression
@@ -29,10 +29,11 @@ function* generator1(x) {
 
 let g1 = generator1(0);
 
-console.log(g1.next()); // execution paused after 1st yield
-console.log(g1.next()); // execution paused after 2nd yield
-console.log(g1.next()); // execution paused after 3rd yield
-console.log(g1.next()); // no yield anymore, return { value:undefined, done:true }
+console.log("1st call: ", g1.next()); // { value: 1, done: false }, execution paused after 1st yield
+console.log("2nd call: ", g1.next()); // { value: 2, done: false }, execution paused after 2nd yield
+console.log("3rd call: ", g1.next()); // { value: 3, done: false }, execution paused after 3rd yield
+console.log("4th call: ", g1.next()); // { value: undefined, done: true }
+
 
 /**
  * Calling the next() method with an argument will resume the generator function execution, 
@@ -47,9 +48,9 @@ function* foo(x) {
 var it = foo( 5 );
 
 console.log("\n============= calling next() with arguments"); // 0
-console.log( it.next() );       // { value:6, done:false }
-console.log( it.next( 12 ) );   // replace the pausing yield expression with parameter and execute until next yield, {value:8, done:false}
-console.log( it.next( 13 ) );   // { value:42, done:true }, in for..of loops, value is dropped
+console.log( it.next() );     // { value:6, done:false }
+console.log( it.next( 12 ) ); // { value:8, done:false } replace the pausing yield expression with parameter and execute until next yield
+console.log( it.next( 13 ) ); // { value:42, done:true }, in for..of loops, value is dropped
 
 
 function *foo() {

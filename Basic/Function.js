@@ -17,14 +17,15 @@
 // logs 1, 2, 1
 
 // default param value
-function sum(x, y = 1, z = 2) {
+function sum(x, y, z = 2, a) {
+	console.log(`exptects ${sum.length} params`);  // 2, only parameters before 1st with default value is counted
+	console.log(`receives ${arguments.length} arguments`); // 2
 	return x + y + z;
 }
-console.log("sum : " + sum(0)); // 3
+console.log("sum : " + sum(0, 1)); // 3
 
-// Rest Parameter
+// Rest Parameter, a is array
 function rest(x, y, ...a) {
-	// a is array
 	return x + y + a.length;
 }
 console.log(rest(1, 2, "s", {}, [], 3)); // 7

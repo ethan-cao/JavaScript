@@ -39,18 +39,19 @@ var myMap = new Map();
 myMap.set(0, "zero");
 myMap.set(1, "one");
 
-for (let [key, value] of this.components) {
+for (let [key, value] of myMap.entries()) {
     console.log(key + " = " + value);
 }
-// 0 = zero
-// 1 = one
+
+
+const text = "test";
 
 // iterate each char in String, in ES6
-for (const c of text) {
+for (let c of text) {
     console.log(c)
 }
 
 // iterate each char in String, in ES5
-for (var i = 0; i < str.length; i++) {
-  console.log(str.charAt(i));
+for (var i = 0; i < text.length; i++) {
+  console.log(text.charAt(i));
 }

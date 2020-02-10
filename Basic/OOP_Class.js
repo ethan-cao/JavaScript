@@ -13,10 +13,13 @@ class Shape {
   }
 }
 
+/**
+ Internally, extends keyword sets Rectangle.prototype.[[Prototype]] to Shape.prototype.
+ [[Prototype]] usually is __proto__
+ */
 class Rectangle extends Shape {
   static name = "Rectangle";
 
-  // static method
   static defaultRectangle() {
     return new Rectangle("default", 0, 0, 100, 100);
   }
