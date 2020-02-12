@@ -1,5 +1,5 @@
 // Arrow function context is set during function creaion only
-// Arrow function cannot set this with bind / call / apply
+// Arrow function cannot set this using bind / call / apply
 // Arrow function cannot be called with new
 
 // Expression, it returns value implicitly
@@ -15,6 +15,7 @@ console.log(f1(1)); // 1
 // rest parameter ... represens an indefinite number of arguments as an array
 // args.__proto__ === Array.prototype  true
 f1 = (...args) => args.length;
+console.log(f1.length); // 0
 
 // Statement, it does not return value implicitly, it must have {}
 let f2 = x => {

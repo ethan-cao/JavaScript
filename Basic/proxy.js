@@ -14,7 +14,6 @@ let obj = {
 };
 
 let handler = {
-    // get trap
     get : (obj, prop) => (prop in obj ? obj[prop] : "no such property"),
     set : (obj, propName, propValue) =>  {
         if (propName === "age"){

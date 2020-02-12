@@ -12,6 +12,7 @@ s.split("_"); // ["test", "text"]
 s.substring(0, s.length - 2); //cut last 2 char:
 s.charCodeAt(0); // asc2 code for the 1st char
 
+s.toUpperCase();  // s remains the same, produces a upper case string
 
 const name = "Foo";
 const amount = 7;

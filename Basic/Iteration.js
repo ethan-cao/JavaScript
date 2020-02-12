@@ -30,16 +30,16 @@ for (let i of array) {
   console.log(i); // 3, 5, 7
 }
 
-for (let [index, item] of array.entries()) {
-  console.log(index, " : ", item);
+for (let [index, value] of array.entries()) {
+  console.log(index, " : ", value);
 }
 
 
-var myMap = new Map();
-myMap.set(0, "zero");
-myMap.set(1, "one");
+var map = new Map();
+map.set(0, "zero");
+map.set(1, "one");
 
-for (let [key, value] of myMap.entries()) {
+for (let [key, value] of map.entries()) {
     console.log(key + " = " + value);
 }
 
