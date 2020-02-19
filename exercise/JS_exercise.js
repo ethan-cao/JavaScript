@@ -140,7 +140,7 @@ Deep copy object
 JSON.parse(JSON.stringify(obj));
 
 // external lib
-_.cloneDeep(obj);
+//_.cloneDeep(obj);
 
 
 
@@ -422,3 +422,42 @@ function throttle(fx, timeout) {
 Promise
 */
 
+
+
+
+
+
+/*--------------------------------------------------------------------------------------------
+1: 写一个function，实现：sum(3)(4)(5)(6)( ) = 18. 最后的空参（）必须有。
+tips：返回函数自身。但是这道题其实相当有难道。实现sum(3)(4)(5)(6)( ) // console.log 18 
+比较容易，但是sum实现多次，这还是很难的。因为return自身所以无法用闭包。tips，用函数的object属性。
+*/
+
+function sum(val){
+
+	if(sum.total === undefined){
+
+			sum.total = 0;
+
+	}
+
+	if(val){
+
+			sum.total+= val;
+
+			return sum;
+
+	}else{
+
+			var result = sum.total;
+
+			sum.total =0;
+
+			return result;
+
+	}
+
+}
+
+console.log(sum(3)(4)(5)(6)()); //18
+console.log(sum(1)(2)(3)()); // 6

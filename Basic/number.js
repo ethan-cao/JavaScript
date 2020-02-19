@@ -9,6 +9,8 @@ let left = 0;
 let right = 10;
 const middle = Math.floor(left + (right - left) / 2);
 
+parseInt("1")
+parseFloat("1.1")
 
 
 // * +"10" is much faster than parseInt("10", 10)
