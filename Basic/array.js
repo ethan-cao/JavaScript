@@ -38,8 +38,9 @@ nums.reduce((a, b) => a + b, 5); // 20
 // reduce( (accumulator, currentValue) => accumulator + currentValue, initialValue))))
 
 
-// batch add/remove elements
+// batch add/remove elements, return the removed items
 // array.splice(start[, deleteCount[, itemToAdd1[, itemToAdd2[, ...]]]])
+// nums = [1, 2, 3, 4, 5, 100];
 nums.splice(i, 1);  // // remove an element by index, nums: [ 1, 3, 4, 5, 100 ]
 nums.splice(0, 0, -1, 0); // nums : [-1,0,1,2,3,4,5,100]
 nums.splice(0, 2); // nums: [1,2,3,4,5,100]
