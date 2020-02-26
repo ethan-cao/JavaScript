@@ -3,17 +3,8 @@ Given a string s, find the longest palindromic substring in s.
 You may assume that the maximum length of s is 1000.
 
 ### Example
-"babad" -> "bab"
-"aba" is also a valid answer.
-
-"cbbd"-> "bb"
-The answer is "b", with the length of 1.
-
-### Related : 1, 516, 647
-
-### Review
-
-this asks for substring !!!
+"babad" -> "bab", "aba" is also a valid answer.
+"cbbd"-> "bb",The answer is "b", with the length of 1.
 
 */
 "use strict";
@@ -21,7 +12,7 @@ this asks for substring !!!
 // 360ms
 var longestPalindrome0 = function(s) {
     let longestPalindrome = "";
-    let isPalindrome = new Array(s.length).fill(false).map(x => new Array(s.length).fill(false));
+    let isPalindrome = Array(s.length).fill(false).map(x => Array(s.length).fill(false));
 
     for (let end = 0; end < s.length; ++end) {
         for (let start = end; start >= 0; --start) {
@@ -43,6 +34,18 @@ var longestPalindrome0 = function(s) {
 
 
 // 80ms
+const getPalindrome = (s, left, right) => {
+    while (left >= 0 && right < s.length && s.charAt(left) === s.charAt(right)) {
+        left--;
+        right++
+    }
+    
+    left++;
+    right--;
+     
+    return s.substring(left, right+1);
+}
+
 var longestPalindrome = function(s) {
     let longestPalindrome = "";
     
@@ -50,25 +53,13 @@ var longestPalindrome = function(s) {
         const oddPalindrome = getPalindrome(s, i, i);
         const evenPalindrome = getPalindrome(s, i, i + 1);
         
-        if (longestPalindrome.length < Math.max(oddPalindrome.length, evenPalindrome.length)) {
-            longestPalindrome = oddPalindrome.length > evenPalindrome.length ? oddPalindrome :  evenPalindrome;
-        }
+        let longerPalindrome = oddPalindrome.length > evenPalindrome.length ? oddPalindrome : evenPalindrome;
+        longestPalindrome = longerPalindrome.length > longestPalindrome.length ? longerPalindrome : longestPalindrome;
     }
 
     return longestPalindrome;
 };
 
-var getPalindrome = (s, start, end) => {
-    while (start >= 0 && end <s.length && s.charAt(start) === s.charAt(end)) {
-        start--;
-        end++
-    }
-    
-    start++;
-    end--;
-     
-    return s.substring(start, end+1);
-}
 
 console.log(longestPalindrome("babad")); // "bab" or "aba"
 console.log(longestPalindrome("cbbd")); // "bb"

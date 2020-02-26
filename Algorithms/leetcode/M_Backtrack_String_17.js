@@ -21,8 +21,8 @@ Q22 is similar
 const mapping = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
 
 // 48ms
-var combine = (idx, digits, combination, combinations) => {
-    if (idx >= digits.length) {
+var combine = (digits, idx, combination, combinations) => {
+    if (idx === digits.length) {
         combinations.push(combination);
         return;
     }  
@@ -33,14 +33,27 @@ var combine = (idx, digits, combination, combinations) => {
     for (let letter of letters) {
         combine(idx+1, digits, combination + letter, combinations);    
     }
+
+    // Alternatively 
+    // for (let letter of letters) {
+    //     combination += letter;
+        
+    //     collectCombinations(digits, idx + 1, combination, combinations);
+            
+    //     combination = combination.substring(0, combination.length-1);
+    // }
 }
 
 var letterCombinations = function(digits) {
-    let combinations = [];
+    const combinations = [];
     
-    if (digits.length > 0) {
-        combine(0, digits, "", combinations);
+    if (digits.length === 0) {
+        return combinations;
     }
 
+    const combination = "";
+    
+    collectCombinations(digits, 0, combination, combinations) 
+    
     return combinations;
 };

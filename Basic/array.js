@@ -1,7 +1,9 @@
 // new Array() and Array() produce the same result
 const oneDimensionArray = new Array(128).fill(0);
-let twoDimensionDArray = Array(3).fill(0).map((x) => Array(3).fill(0)); // 10% slower than loop
 console.log(oneDimensionArray.length); // 128
+
+let twoDimensionDArray = Array(3).fill(0).map(x =>Array(3).fill(0));  // 10% slower than loop
+// let twoDimensionDArray = Array(3).fill(Array(3).fill(0));  // wrong the inner array is shared 
 
 Array.isArray([]); // true
 
@@ -10,6 +12,7 @@ const nums = [1, 2, 3, 4, 5, 100];
 console.log(nums); 				// [ 1, 2, 3, 4, 5, 100 ]
 console.log(nums.toString());   // [ 1, 2, 3, 4, 5, 100 ]
 console.log(...nums);           // 1, 2, 3, 4, 5, 100
+console.log(nums["0"]);         // 1, access with index as string
 
 nums.forEach(num => console.log(num));
 

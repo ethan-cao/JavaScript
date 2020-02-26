@@ -7,8 +7,14 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9, return [0, 1].
 
 */
+"use strict";
 
 // 60ms
+/**
+ * @param {array} nums 
+ * @param {number} word2
+ * @return {array}
+ */
 var twoSum = function(nums, target) {
     const indices = new Map();
     
@@ -43,3 +49,14 @@ var twoSum1 = function(nums, target) {
      
     return[];
 };
+
+
+const result = twoSum([2, 7, 11, 15], 9);
+console.assert(result.length === 2, "wrong");
+console.assert(result.includes(0), "wrong");
+console.assert(result.includes(1), "wrong");
+
+// Alternatively
+console.log(result.length === 2);
+console.log(result.includes(0));
+console.log(result.includes(1));
