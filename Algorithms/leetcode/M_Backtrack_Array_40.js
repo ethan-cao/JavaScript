@@ -16,10 +16,9 @@ A solution set is: [ [1,2,2], [5] ]
 
 */
 
-const check = (candidates, target, idx, combination, combinations) => {
+const collectCombinations = (candidates, target, idx, combination, combinations) => {
     if (target === 0) {
         combinations.push([...combination]);
-        return;
     }
     
     for (let i = idx;  i < candidates.length; ++i) {
@@ -31,11 +30,8 @@ const check = (candidates, target, idx, combination, combinations) => {
             continue;
         }
         
-        
         combination.push(candidates[i]);
-        
-        check(candidates, target - candidates[i], i + 1, combination, combinations);
-        
+        collectCombinations(candidates, target - candidates[i], i + 1, combination, combinations);
         combination.pop();
     }
     
@@ -47,7 +43,7 @@ var combinationSum2 = function(candidates, target) {
     
     candidates.sort((a,b)=>a-b);
     
-    check(candidates, target, 0, combination, combinations);
+    collectCombinations(candidates, target, 0, combination, combinations);
     
     return combinations;
 };
