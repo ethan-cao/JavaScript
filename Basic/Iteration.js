@@ -43,6 +43,16 @@ for (let [key, value] of map.entries()) {
     console.log(key + " = " + value);
 }
 
+let set = new Set();
+set.add("one")
+   .add("two")
+   .add("one");
+   
+for (let key of set.values()) {
+    console.log(key); // insertion order. ["one", "two"]
+}
+// map is the same
+
 
 const text = "test";
 

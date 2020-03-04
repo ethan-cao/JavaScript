@@ -81,7 +81,6 @@ nums.sort((a, b) => a - b); // // sort array: [1,2,3,4,5,100];
 
 
 
-// Array deconstructing
 var [head, ...tail] = [1, 2, 3, 4, 5];     // head = 1, tail = [2,3,4,5]
 var [head, tail] = [1, 2, 3, 4, 5];        // head = 1, tail = 2
 var [a, , b = 10, rest] = [1, 2, 3, 4, 5];  // a = 1, b = 3, rest = 4

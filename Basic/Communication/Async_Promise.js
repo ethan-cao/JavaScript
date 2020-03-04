@@ -13,7 +13,6 @@ promise help to avoid nested callbacks
 
 
 
-
 /*  Promise construtor takes 1 parameter, an executor function 
 
     Executor works asynchronously, and takes 2 parameters resolve and reject.
@@ -21,7 +20,7 @@ promise help to avoid nested callbacks
 
     executor is invoked eagerly. meaning a promise starts working once the promise constructor is invoked 
     executor is invoked only once
-    wrap executor in functions if need to be invoked later 
+    wrap executor in functions if needed to be invoked later 
 
     If an error is thrown in the executor function, the promise is rejected. 
     The return value of the executor is ignored  
@@ -38,27 +37,26 @@ const promise = new Promise((resolve, reject) => {
 
 
 
-// promise object itself does not expose its value/status, 
-// use promise.then(resolve(promiseValue), reject(rejectionReason)) to assess
+// promise does not expose its state, use promise.then(resolve(promiseValue), reject(rejectionReason)) to assess
 // promise.then(resolve(promiseValue), reject(rejectionReason)) returns a !NEW! promise
 // resolve/reject are callback functions for the success/failure cases 
 // resolve/reject are called asynchronously, and are both optional, they can be called only once
 
 // if resolve/reject returns a value(v1), the promise returned by promise.then() is resolved with the same value (as v1)
-// if resolve/reject return a promise (p1), promise returned by promise.then() has the same state and value (as p1)
+// if resolve/reject returns a promise(p1), promise returned by promise.then() has the same state and value (as p1)
 // if resolve/reject throws an error, promise returned by promise.then() is rejected with the exception as reason
 // if resolve/reject is not a function, promise(p2) returned by promise.then() has the same state and value (as p2)
 
 // then can be called on the same promise multiple times
 
 promise.then(
-  promiseValue => console.log(promiseValue),
-  rejectionReason => console.log(rejectionReason)  //  Error object is good option for rejectionReason
+  resolvedValue => console.log(resolvedValue),
+  rejectedValue => console.log(rejectedValue)  //  Error object is good option for rejectionReason
 );
 
 
 // wrap promise constructor in functions if need to be invoked later
-const delay = time => new Promise(resolve => setTimeout(resolve, time));
+const delay = (time) => new Promise((resolve, reject) => setTimeout(resolve, time));
 
 // promise.then() can be called more than once and chain to aggregate callbacks.
 delay(2000) // return a promise

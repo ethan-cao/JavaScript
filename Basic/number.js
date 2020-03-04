@@ -15,3 +15,8 @@ parseFloat("1.1")
 
 // * +"10" is much faster than parseInt("10", 10)
 console.log(typeof (+"10")); //number
+
+console.log(Number.MIN_VALUE);  // float 
+console.log(Number.MIN_SAFE_INTEGER); // integer 
+console.log(Number.MAX_VALUE);  // float 
+console.log(Number.MAX_SAFE_INTEGER); // integer 
