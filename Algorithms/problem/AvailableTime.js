@@ -109,7 +109,6 @@ const findAvailableTime = (schedules) => {
 	return availability;
 }
 
-
 const r1 = findAvailableTime(schedules1);
 const r2 = findAvailableTime(schedules2);
 
