@@ -9,7 +9,6 @@ Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
 Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 
 */
-
 "use strict";
 
 var merge = function(intervals) {
@@ -19,21 +18,24 @@ var merge = function(intervals) {
 		return mergedInterval;
 	}
 
-	intervals.sort((i1, i2) => i1[0] - i2[0]);
+	const input = [...intervals];
+	input.sort((a, b) => a[0] - b[0]);
 
-	let start = intervals[0][0];
-	let end = intervals[0][1];
+	let start = input[0][0];
+	let end = input[0][1];
 
-	for (let i = 1; i < intervals.length; ++i) {
-		const interval = intervals[i];
+	for (let i = 1; i < input.length; ++i) {
+		let interval = input[i];
+		let currentStart = interval[0];
+		let currentEnd = interval[1];
 
-		if (end >= interval[0]) {
-			end = Math.max(end, interval[1]);
+		if (end >= currentStart) {
+			end = Math.max(end, currentEnd);
 		} else {
 			mergedInterval.push([start, end]);
 
-			start = interval[0];
-			end = interval[1];
+			start = currentStart;
+			end = currentEnd;
 		}
 	}
 
@@ -42,6 +44,4 @@ var merge = function(intervals) {
 	return mergedInterval;
 };
 
-var merge1 = function(intervals) {
-    
-}
+var merge1 = function(intervals) {};

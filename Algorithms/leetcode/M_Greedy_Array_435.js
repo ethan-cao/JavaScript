@@ -31,9 +31,9 @@ var eraseOverlapIntervals = function(intervals) {
     // let end = Number.MIN_SAFE_INTEGER;
 
 	for (let i = 1; i <intervals.length; ++i) {
-        const interval = intervals[i];
+		const interval = intervals[i];
 
-		if (interval[0] < end) {
+		if (end > interval[0]) {
 			count++;
 			end = Math.min(end, interval[1]);
 		} else {
