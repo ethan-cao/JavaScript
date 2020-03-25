@@ -18,6 +18,7 @@ Output: 8
 Explanation: A -> B -> idle -> A -> B -> idle -> A -> B.
 
 */
+"use strict";
 
 var leastInterval = function(tasks, n) {
 	const counter = Array(26).fill(0);

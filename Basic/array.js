@@ -3,7 +3,7 @@ const oneDimensionArray = new Array(128).fill(0);
 console.log(oneDimensionArray.length); // 128
 
 let twoDimensionDArray = Array(3).fill(0).map(x =>Array(3).fill(0));  // 10% slower than loop
-// let twoDimensionDArray = Array(3).fill(Array(3).fill(0));  // wrong the inner array is shared 
+// let twoDimensionDArray = Array(3).fill(Array(3).fill(0));  // wrong: the inner array is shared 
 
 Array.isArray([]); // true
 
