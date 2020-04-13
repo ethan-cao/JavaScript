@@ -9,7 +9,7 @@ enum Role {
 type User = {
     name: string;
     age: number
-}
+};
 
 const u1: User = { name: 'Max', age: 30 }; 
 

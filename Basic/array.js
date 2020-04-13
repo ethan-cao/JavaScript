@@ -25,8 +25,10 @@ for (let [index, item] of nums.entries()) {
 }
 
 
-nums.push(6); //Add to the last index, nums = [1,2,3,4,5,100,6];
+
+nums.push(6, 7); //Add to the last index, nums = [1,2,3,4,5,100,6];
 nums.pop(); // Removes value at the last index, nums = [1,2,3,4,5,100];
+nums.pop();
 
 nums.unshift(0); //Add to the first index, nums = [0,1,2,3,4,5,100];
 nums.shift(); //remove value at the first index, nums = [1,2,3,4,5,100];
