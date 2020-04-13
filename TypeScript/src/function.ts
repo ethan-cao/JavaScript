@@ -6,7 +6,8 @@ function add(n1: number, n2: number): number{
 
 
 // with void as return type, no need to have return sentence, better than undefined 
-function print1(n: any): void {
+// the param is option, the default value is undefined 
+function print1(n?: any): void {
     console.log(n);
 }
 
@@ -26,7 +27,13 @@ let combine: (a: number, b: number) => number;
 combine = add;
 console.log(combine(10, 20)); // 30
 
-
+// define function type with interface
+interface combineI {
+    // define an anuonus fuction in interface, ts use this to define function
+    (a: number, b: number): number;
+}
+let addFx: combineI;
+addFx = add;
 
 // void callback function type   does not force no return, mererly indicate return is useless
 function combineAndPrint(a: number, b: number = 1, callback: (n: number) => void) {

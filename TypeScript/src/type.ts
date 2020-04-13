@@ -9,8 +9,9 @@ enum Role {
 type User = {
     name: string;
     age: number
+    readonly gender: boolean; // type alias can have readonly modeifer
 };
 
-const u1: User = { name: 'Max', age: 30 }; 
+const u1: User = { name: 'Max', age: 30, gender: true}; 
 
 console.log(u1.name);
