@@ -6,12 +6,23 @@ enum Role {
 };
 
 // type alias
-type User = {
+type Admin = {
     name: string;
-    age: number
-    readonly gender: boolean; // type alias can have readonly modeifer
+    privileges: string[];
 };
 
-const u1: User = { name: 'Max', age: 30, gender: true}; 
+type Employee = {
+    name: string;
+    readonly gender: boolean; // type alias can have readonly modeifer
+}
 
-console.log(u1.name);
+// Intersection type
+type ElevatedEmployee = Employee & Admin;
+
+// possible to do it with interface
+// interface Admin {}  
+// interface Employee {}
+// interface ElevatedEmployee extends Employee, Admin {}
+
+const e1: ElevatedEmployee = { name: "Max", gender: true, privileges: ["manage"]}; 
+

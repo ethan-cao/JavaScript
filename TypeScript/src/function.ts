@@ -3,8 +3,6 @@ function add(n1: number, n2: number): number{
     return n1 + n2;
 }
 
-
-
 // with void as return type, no need to have return sentence, better than undefined 
 // the param is option, the default value is undefined 
 function print1(n?: any): void {
@@ -48,3 +46,15 @@ const result = combineAndPrint(1, 2, (x) => {
 });
 console.log(result) // s
 
+
+
+// function overload
+function checkType(obj: Array<any>): void;
+function checkType(obj: String): void;
+function checkType(obj: Array<any> | String): void {
+    if (obj instanceof Array) {
+        console.log("Array");
+    } else if (obj instanceof String) {
+        console.log("String");
+    }
+}
