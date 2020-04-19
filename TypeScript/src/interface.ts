@@ -10,7 +10,7 @@ interface Human {
 
 // interface can inherit multiple interface
 interface Greetable extends Human {
-    greet(phrase: string): void;
+    greet?(phrase: string): void;
 }
 
 let user1: Greetable;
@@ -19,7 +19,7 @@ user1 = {
     name: "Ethan",
     language: "English",
 
-    greet(phrase: string) {
+    greet (phrase: string) {
         console.log(phrase);
     }
 };
@@ -49,7 +49,7 @@ class Person implements Greetable {
         throw new Error("Method not implemented.");
     }
 
-    greet(phrase: string): void {
+    greet?(phrase: string): void {
         throw new Error("Method not implemented.");
     }
 }
@@ -59,3 +59,4 @@ const p1: Human = new Person("Ethan", 29);
 // type cast
 const p2: Person = <Person> p1;
 const p3: Person = p1 as Person;
+const p4 = {name: "Ethan"} as Human;
