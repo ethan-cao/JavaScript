@@ -36,7 +36,7 @@ interface Adult {
 // illegal, cannot use instanceof with Greetable
 // console.log(user1 instanceof Greetable)
 
-class Person implements Greetable {
+class Man implements Greetable {
     name : string;
     language: "English";
     alias?: string;
@@ -54,9 +54,9 @@ class Person implements Greetable {
     }
 }
 
-const p1: Human = new Person("Ethan", 29);
+const p1: Human = new Man("Ethan", 29);
 
 // type cast
-const p2: Person = <Person> p1;
-const p3: Person = p1 as Person;
+const p2: Man = <Man> p1;
+const p3: Man = p1 as Man;
 const p4 = {name: "Ethan"} as Human;

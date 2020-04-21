@@ -11,6 +11,15 @@ let mergedObj2 = merge({name: "Ethan"}, {age:28});
 console.log("merged obj2: ", mergedObj2);
 
 
+const primise = new Promise<number>((resolve, reject)=>{
+    setTimeout(()=>{
+        resolve(100); // generic type only allows number
+    }, 5000);
+});
+
+primise.then((data)=>{
+    data.toFixed(2); // data is number
+});
 
 
 // type constraints
@@ -24,9 +33,9 @@ sayHi("hello");
 // keyof T yields the type of permitted property names for T, namely union of known public property names of T
 // A (keyof T) type is considered a subtype of string.
 // keyof operates on types
-type keys = keyof Person;
+type keys = keyof Man;
 
-function extract<O extends Person, K extends keyof Person>(obj: O, key: K) {
+function extract<O extends Man, K extends keyof Man>(obj: O, key: K) {
     return obj[key];
 }
 
