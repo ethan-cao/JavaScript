@@ -15,6 +15,7 @@ function addAll1() {
 
 // addAll1();
 
+//---------------------------------------------------------------------
 // Promise version
 const addString2 = (previous, current) =>
 	new Promise((resolve) =>
@@ -34,6 +35,8 @@ const addAll2 = () =>
 		});
 // addAll2();
 
+
+//---------------------------------------------------------------------
 /*
  Await version
 
@@ -69,4 +72,5 @@ let p = addAll3();
 // after 9s, it becomes resolved promise with value: A B C
 // nothing is blocking in this context
 
+//---------------------------------------------------------------------
 // Observable version

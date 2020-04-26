@@ -1,22 +1,27 @@
 /**
- * Decorator is just a function, it can be apply to class, class property, class method
+ * Decorator is just a function, it can be used with @ 
  * or a function can be used as a decorator
+ * 
+ * Decorator can be used with class, method, accessor, property or parameter.
  * 
  * Decorator is executed when its target is defined
  */
 
 
+// Log() is a decorator factory, it returns a decorator
 function Log(msg: string) {
 	console.log('Log LOGGER FACTORY');
 
-	// Log0 is a decorator factory, it returns a decorator
+	// return a decorator
 	return function (constructor: Function) {
 		console.log(msg);
 		console.log(constructor);
 	};
 }
 		
-// Log1 is a decorator function
+// Log0 is a decorator function, a class decorator
+// A Class Decorator is declared just before a class declaration. The class decorator is applied to class constructor
+// parameter: consturcotr, return: new constructor 
 function Log0(constructor: Function) {
 	console.log("Log0");
 }
@@ -31,7 +36,7 @@ class Person {
 	}
 }
 
-// logs: Log LOGGER FACTORY, Log0, Log
+// prints: Log LOGGER FACTORY, Log0, Log
 // Decorator is executed from bottom to up, that is why Log0 is printed before Log
 // Decorator Factory is executed from top to bottom, so Log LOGGER FACTORY is printed first
 
@@ -40,32 +45,32 @@ class Person {
 /**
  * Decorator function gets parameter and returns value
  * its parameter and return depends on where it is used
+ * 
+ * targe is either the constructor function of the class for a static member, or the prototype of the class for an instance member
  */
 
-function Log1(target: any, name: string) {
-	console.log('Property decorator!');
-	console.log(target, name);
+// Property decorator
+// no return
+function Log1(target: object, name: string) {
+	console.log(`Log1 - ${name} `);
 }
 
-function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
-	console.log('Accessor decorator!');
-	console.log(target);
-	console.log(name);
-	console.log(descriptor);
+// Accessor decorator
+// the return value will be used as the PropertyDescriptor 
+function Log2(target: object, name: string, descriptor: PropertyDescriptor) {
+	console.log(`Log2 - ${name} `);
 }
 
-function Log3(target: any, name: string, descriptor: PropertyDescriptor) {
-	console.log('Method decorator!');
-	console.log(target);
-	console.log(name);
-	console.log(descriptor);
+// Method decorator
+// the return value will be used as the PropertyDescriptor 
+function Log3(target: object, name: string, descriptor: PropertyDescriptor) {
+	console.log(`Log3 - ${name} `);
 }
 
-function Log4(target: any, name: string, position: number) {
-	console.log('Parameter decorator!');
-	console.log(target);
-	console.log(name);
-	console.log(position);
+// Parameter decorator
+// no return
+function Log4(target: object, name: string, position: number) { 
+	console.log(`Log4 - ${name} `);
 }
 
 class Product {
@@ -96,22 +101,25 @@ class Product {
 const product1 = new Product('Book', 19);
 const product2 = new Product('Book 2', 29);
 
+
 //---------------------------------------------------------
 
+// use method decorator to bind automatically
 
-function Autobind(target: any, name: string, descriptor: PropertyDescriptor) {
+function Autobind(target: object, name: string, descriptor: PropertyDescriptor) {
 	const originalMethod = descriptor.value;
 
-	const adjDescriptor: PropertyDescriptor = {
+	const newDescriptor: PropertyDescriptor = {
 		configurable: true,
 		enumerable: false,
+		
 		get() {
-			const boundFn = originalMethod.bind(this);
-			return boundFn;
+			// this refers to the object invokes get() 
+			return originalMethod.bind(this);
 		}
 	};
 
-	return adjDescriptor;
+	return newDescriptor;
 }
 
 class Printer {
@@ -124,11 +132,12 @@ class Printer {
 }
 
 const p = new Printer();
-const fx = p.showMessage;
+const fx = p.showMessage; // p.showMessage: p access showMessage, p invokes get() from PropertyDescriptor
 
 fx();
 
-// --------------------------------------------
+
+//--------------------------------------------
 
 // use decorator to validate 
 
