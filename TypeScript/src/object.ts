@@ -19,3 +19,10 @@ console.log(user.job?.employer?.name);
 const input = null;
 const output = input ?? "output";  // iff input is null or undefined, output is "output"
 console.log(output)
+
+
+// declare is used to tell TypeScript that the variable has been created elsewhere. 
+// If you use declare, nothing is added to the generated JavaScript - just simply a hint to the compiler
+
+// e.g. if use an external script that defines a, use declare const a to tell TS compiler that a has already been set up
+declare const a: any;
