@@ -26,3 +26,8 @@ type ElevatedEmployee = Employee & Admin;
 
 const e1: ElevatedEmployee = { name: "Max", gender: true, privileges: ["manage"]}; 
 
+
+// type assertions, equivalent
+let v: any;
+let s = v as string // ok in tsx and ts
+let s2 = <string> v // only valid in ts

@@ -1,4 +1,7 @@
 abstract class Organization {
+    // by default, class member is public
+    taxId: string; 
+
     // a class that has an abstract method must be asbtract class
     protected name: string;
 

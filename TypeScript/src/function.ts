@@ -1,7 +1,5 @@
 // good pratice: just let TS infer the return type
-function add(n1: number, n2: number): number{
-    return n1 + n2;
-}
+const add = (n1: number, n2: number) => n1 + n2;
 
 // with void as return type, no need to have return sentence, better than undefined 
 // the param is option, the default value is undefined 

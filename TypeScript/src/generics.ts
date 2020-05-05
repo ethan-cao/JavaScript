@@ -1,3 +1,7 @@
+// Generic type in function
+const fn = <T>(a: T) => a
+
+
 // TS can infers the return type is T1 & T2, 
 function merge<T1, T2> (obj1: T1, obj2: T2) {
     return Object.assign(obj1, obj2);
