@@ -1,6 +1,9 @@
 // good pratice: just let TS infer the return type
 const add = (n1: number, n2: number) => n1 + n2;
 
+
+// Do use the return type void for callbacks whose value will be ignored
+// Don’t use the return type any for callbacks whose value will be ignored
 // with void as return type, no need to have return sentence, better than undefined 
 // the param is option, the default value is undefined 
 function print1(n?: any): void {
@@ -12,6 +15,17 @@ function print2(n: any): undefined {
     return;
 }
 
+
+// Don’t use optional parameters in callbacks unless you really mean it:
+// Rather, just let consumer decide how many params, it’s always legal to provide a callback that accepts fewer arguments.
+/* WRONG */
+interface Fetcher {
+    getObject(done: (data: any, elapsedTime?: number) => void): void;
+}
+/* OK */
+interface Fetcher {
+    getObject(done: (data: any, elapsedTime: number) => void): void;
+}
 
 
 // Function type
