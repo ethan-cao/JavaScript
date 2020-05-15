@@ -1,3 +1,7 @@
+// when creating new types through like primitives, union types, and tuple types, use type (keyword)
+// when anything else, use interface
+
+
 // interface has no implementation 
 interface Human {
     // interface property cannot use public/private modifier, only possible with readonly
