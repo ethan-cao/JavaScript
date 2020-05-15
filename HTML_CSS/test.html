@@ -7,23 +7,14 @@
 		<title>Document</title>
 	</head>
 	<body>
-        <div id="emails-editor"></div>
-		<script src="emails-editor.js"></script>
+		<div id="radio1">
+			<input type="radio" name="group" id="radio1" value="radio1"/>
+			<label for="radio1">radio1</label>
+			<input type="radio" name="group" id="radio2" value="radio2"/>
+			<label for="radio2">radio2</label>
+		</div>
+		
 		<script>
-			// EmailsEditor will be added in the container
-			const container = document.querySelector("#emails-editor");
-
-			// options contains the name of the board and emails to display
-			const options1 = {
-				boardName: "Board name",
-				emails: ["john@miro.com"]
-			};
-			const form1 = EmailsEditor({ container, ...options1 });
-
-			/* user can create multiple form by calling
- 		        const form2 = EmailsEditor({ container, ...options2 });
- 		        const form3 = EmailsEditor({ container, ...options3 });
-            */
-		</script>
+			
 	</body>
 </html>
