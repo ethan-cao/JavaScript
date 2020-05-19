@@ -1,5 +1,6 @@
 abstract class Organization {
-    // by default, class member is public
+    // 3 types of access modifiers: public, private and protected.
+    // by default, class member (property, method) is public
     taxId: string; 
 
     // a class that has an abstract method must be asbtract class

@@ -72,5 +72,8 @@ let p = addAll3();
 // after 9s, it becomes resolved promise with value: A B C
 // nothing is blocking in this context
 
+
+
+
 //---------------------------------------------------------------------
 // Observable version
