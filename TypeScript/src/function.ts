@@ -74,9 +74,9 @@ function checkType(obj: Array<any> | String): void {
 // Don’t put more general overloads before more specific overloads:
 
 /* WRONG */
-declare function fn(x: any): any;
-declare function fn(x: HTMLElement): number;
-declare function fn(x: HTMLDivElement): string;
+declare function fn1(x: any): any;
+declare function fn2(x: HTMLElement): number;
+declare function fn3(x: HTMLDivElement): string;
 
 var myElem: HTMLDivElement;
 var x = fn(myElem); // x: any, wat?
@@ -84,9 +84,9 @@ var x = fn(myElem); // x: any, wat?
 //Do sort overloads by putting the more general signatures after more specific signatures
 // TypeScript chooses the first matching overload when resolving function calls. 
 /* OK */
-declare function fn(x: HTMLDivElement): string;
-declare function fn(x: HTMLElement): number;
-declare function fn(x: any): any;
+declare function fn3(x: HTMLDivElement): string;
+declare function fn4(x: HTMLElement): number;
+declare function fn5(x: any): any;
 
 var myElem: HTMLDivElement;
 var x = fn(myElem); // x: string, :)
