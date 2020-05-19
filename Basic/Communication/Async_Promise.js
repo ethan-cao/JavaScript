@@ -15,7 +15,7 @@ promise help to avoid nested callbacks
 
 /*  Promise construtor takes 1 parameter, an executor function 
 
-    Executor works asynchronously, and takes 2 parameters resolve and reject.
+    Executor works asynchronously, and takes 2 parameters resolve() and reject()
     the first resolve/reject to be invoked determines the status of the promise
 
     executor is invoked eagerly. meaning a promise starts working once the promise constructor is invoked 
@@ -38,7 +38,6 @@ const promise = new Promise((resolve, reject) => {
 
 
 // promise does not expose its state, use promise.then(resolve(promiseValue), reject(rejectionReason)) to assess
-// promise.then(resolve(promiseValue), reject(rejectionReason)) returns a !NEW! promise
 // resolve/reject are callback functions for the success/failure cases 
 // resolve/reject are called asynchronously, and are both optional, they can be called only once
 
@@ -47,12 +46,22 @@ const promise = new Promise((resolve, reject) => {
 // if resolve/reject throws an error, promise returned by promise.then() is rejected with the exception as reason
 // if resolve/reject is not a function, promise(p2) returned by promise.then() has the same state and value (as p2)
 
-// then can be called on the same promise multiple times
-
 promise.then(
   resolvedValue => console.log(resolvedValue),
   rejectedValue => console.log(rejectedValue)  //  Error object is good option for rejectionReason
 );
+
+/* promise.then(resolve(promiseValue), reject(rejectionReason)) returns a !NEW! promise
+Once a Promise is resolved, the respective handler function will be called asynchronously  
+
+If a handler function:
+  returns a value, the promise returned by then gets resolved with the returned value as its value.
+  returns an already fulfilled promise, the promise returned by then gets fulfilled with that promise's value as its value.
+  returns an already rejected promise, the promise returned by then gets rejected with that promise's value as its value.
+  doesn't return anything, the promise returned by then gets resolved with an undefined value.
+  throws an error, the promise returned by then gets rejected with the thrown error as its value.
+    returns another pending promise object, the resolution/rejection of the promise returned by then will be subsequent to the resolution/rejection of the promise returned by the handler. Also, the resolved value of the promise returned by then will be the same as the resolved value of the promise returned by the handler.
+*/
 
 
 // wrap promise constructor in functions if need to be invoked later
