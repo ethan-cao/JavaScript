@@ -7,7 +7,7 @@ interface Human {
     // interface property cannot use public/private modifier, only possible with readonly
     readonly name: string;
     alias?: string; // optional property
-    language: "English"
+    language: "English" // default value
 
     sayHi?(): void;  // optional method
 }
