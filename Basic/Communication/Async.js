@@ -18,9 +18,9 @@ function addAll1() {
 //---------------------------------------------------------------------
 // Promise version
 const addString2 = (previous, current) =>
-	new Promise((resolve) =>
+	new Promise((resolve) => {
 		setTimeout(resolve(previous + " " + current), 1000)
-	);
+	});
 
 const addAll2 = () =>
 	addString2("", "A")

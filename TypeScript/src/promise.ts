@@ -1,42 +1,40 @@
-const sayHey1 = (callback) => setTimeout(() => callback("hey"), 1000);
+const sayHey1 = (callback) => setTimeout(() => callback(), 1000);
+const greet1 = (callback) => {
+   sayHey1(() => {
+       callback("hey in 1s")
+       sayHey1(() => {
+           callback("hey in 2s")
+           sayHey1(callback.bind(null, "hey in 3s"));
+       });
+   }); 
+};
 
-great1();
-
-// const greet1 = () => {
-//     sayHey1(() => {
-//         sayHey1(() => {
-//             sayHey1(() => {
-//                 console
-//             });
-//         });
-//     });
-// };
-
-// const sayHey1 = (callback) => {
-//     setTimeout(() => {
-//         callback("Hey in 1s");
-//         setTimeout(() => {
-//             callback("Hey in 2s");
-//             setTimeout(() => {
-//                 callback("Hey in 3s");
-//             }, 1000);
-//         }, 1000);
-//     }, 1000);
-// };
-
-// hey1(console.log);
+// greet1(console.log);
 
 
-const wait = (delay) => new Promise((resolved) => setTimeout(resolved, delay));
-const sayHey3 = async (callback) => {
-    await wait(1000);
+const sayHey2 = () => new Promise((callback) => {setTimeout(()=> callback(), 1000)});
+const greet2 = (callback) => {
+      sayHey2()
+        .then(() => {
+            callback("hey in 1s");
+        })
+        .then(() => callback("hey in 2s") )
+};
+
+greet2(console.log);
+
+
+const sayHey3 = (delay) => new Promise((resolved) => setTimeout(resolved, delay));
+const greet3 = async (callback) => {
+    // use the await to pause the execution of the code until the Promise is resolved
+    await sayHey3(1000);
     callback("hey in 1s");
 
-    await wait(1000);
+    await sayHey3(1000);
     callback("hey in 2s");
 
-    await wait(1000);
+    await sayHey3(1000);
     callback("hey in 3s");
 };
 
-// sayHey3(text => console.log(text));
+// greet3(text => console.log(text));
