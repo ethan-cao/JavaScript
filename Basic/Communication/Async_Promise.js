@@ -17,11 +17,11 @@ promise help to avoid nested callbacks
 
     Executor works asynchronously, and takes 2 parameters resolve() and reject()
     the first resolve/reject to be invoked determines the status of the promise
+    executor is invoked only once
 
     executor is invoked eagerly. meaning a promise starts working once the promise constructor is invoked 
-    executor is invoked only once
     wrap executor in functions if needed to be invoked later 
-
+    
     If an error is thrown in the executor function, the promise is rejected. 
     The return value of the executor is ignored  
 */
@@ -37,31 +37,26 @@ const promise = new Promise((resolve, reject) => {
 
 
 
-// promise does not expose its state, use promise.then(resolve(promiseValue), reject(rejectionReason)) to assess
-// resolve/reject are callback functions for the success/failure cases 
-// resolve/reject are called asynchronously, and are both optional, they can be called only once
+/*
+promise does not expose its state, use promise.then(resolve(promiseValue), reject(rejectionReason)) to assess
+resolve/reject are callback functions for the success/failure cases 
+resolve/reject are called asynchronously, and are both optional, they can be called only once
+then() returns a Promise for the completion of which ever callback is executed.
 
-// if resolve/reject returns a value(v1), the promise returned by promise.then() is resolved with the same value (as v1)
-// if resolve/reject returns a promise(p1), promise returned by promise.then() has the same state and value (as p1)
-// if resolve/reject throws an error, promise returned by promise.then() is rejected with the exception as reason
-// if resolve/reject is not a function, promise(p2) returned by promise.then() has the same state and value (as p2)
-
+if resolve/reject 
+  returns a value(v1), promise returned by promise.then() is resolved with the same value (as v1)
+  returns an already fulfilled promise, the promise returned by then gets fulfilled with that promise's value as its value.
+  returns an already rejected promise, the promise returned by then gets rejected with that promise's value as its value.
+  returns another pending promise object, the resolution/rejection of the promise returned by then will be subsequent to the resolution/rejection of the promise returned by the handler. Also, the resolved value of the promise returned by then will be the same as the resolved value of the promise returned by the handler.
+  return nothing, the promise returned by then gets resolved with an undefined value.
+  throws an error, promise returned by promise.then() is rejected with the exception as reason
+  is not a function, promise(p2) returned by promise.then() has the same state and value (as p2)
+*/
+  
 promise.then(
   resolvedValue => console.log(resolvedValue),
   rejectedValue => console.log(rejectedValue)  //  Error object is good option for rejectionReason
 );
-
-/* promise.then(resolve(promiseValue), reject(rejectionReason)) returns a !NEW! promise
-Once a Promise is resolved, the respective handler function will be called asynchronously  
-
-If a handler function:
-  returns a value, the promise returned by then gets resolved with the returned value as its value.
-  returns an already fulfilled promise, the promise returned by then gets fulfilled with that promise's value as its value.
-  returns an already rejected promise, the promise returned by then gets rejected with that promise's value as its value.
-  doesn't return anything, the promise returned by then gets resolved with an undefined value.
-  throws an error, the promise returned by then gets rejected with the thrown error as its value.
-    returns another pending promise object, the resolution/rejection of the promise returned by then will be subsequent to the resolution/rejection of the promise returned by the handler. Also, the resolved value of the promise returned by then will be the same as the resolved value of the promise returned by the handler.
-*/
 
 
 // wrap promise constructor in functions if need to be invoked later
