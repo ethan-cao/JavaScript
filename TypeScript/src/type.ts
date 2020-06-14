@@ -3,7 +3,7 @@ enum Role {
     ADMIN = 'ADMIN', 
     READ_ONLY = 100,  
     AUTHOR
-};
+}
 
 // type alias
 type Admin = {
@@ -26,8 +26,11 @@ type ElevatedEmployee = Employee & Admin;
 
 const e1: ElevatedEmployee = { name: "Max", gender: true, privileges: ["manage"]}; 
 
+const XXX: "a" = "a";
+console.log(XXX)
 
 // type assertions, equivalent
-let v: any;
-let s = v as string // ok in tsx and ts
-let s2 = <string> v // only valid in ts
+// let v: any;
+// let s = v as string // ok in tsx and ts
+// let s2 = <string> v // only valid in ts
+

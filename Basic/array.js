@@ -50,6 +50,10 @@ nums.splice(i, 1);  // // remove an element by index, nums: [ 1, 3, 4, 5, 100 ]
 nums.splice(0, 0, -1, 0); // nums : [-1,0,1,2,3,4,5,100]
 nums.splice(0, 2); // nums: [1,2,3,4,5,100]
 
+// remove an element from array: get its index then splice
+
+// empty an array
+// nums.length = 0;
 
 // shallow copy
 var newArray = nums.slice();     

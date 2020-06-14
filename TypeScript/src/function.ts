@@ -5,7 +5,7 @@ const add = (n1: number, n2: number) => n1 + n2;
 // Do use the return type void for callbacks whose value will be ignored
 // Don’t use the return type any for callbacks whose value will be ignored
 // with void as return type, no need to have return sentence, better than undefined 
-// the param is option, the default value is undefined 
+// the param is optional, the default value is undefined 
 function print1(n?: any): void {
     console.log(n);
 }
