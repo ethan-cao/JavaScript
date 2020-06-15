@@ -60,10 +60,10 @@ promise.then(
 
 
 // wrap promise constructor in functions if need to be invoked later
-const delay = (time) => new Promise((resolve, reject) => setTimeout(resolve, time));
+const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
 
 // promise.then() can be called more than once and chain to aggregate callbacks.
-delay(2000) // return a promise
+  delay(2000) // return a promise
   .then(() => {
     console.log("Resolved after 2 seconds");
     return delay(1500);  // return a promise
