@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import NewSongForm from "./NewSongForm";
+import { SongContext } from "../context/SongContext";
 
 const SongList = () => {
-	const [songs, setSongs] = useState([
-		{ title: "almost", id: 1 },
-		{ title: "memory gospel", id: 2 },
-		{ title: "this wild darkness", id: 3 },
-    ]);
+	const {songs, addSong} = useContext(SongContext)
 
     useEffect(() => {
         console.log(" songs: ", songs);
     }, [songs]);
     
-    const addSong = (title) => {
-        setSongs([...songs, {title, id: songs.length + 1}]);
-    };
-
 	return (
 		<div className="song-list">
 			<ul>
