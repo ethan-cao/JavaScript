@@ -6,7 +6,11 @@ const SongList = () => {
 	const {songs, addSong} = useContext(SongContext)
 
     useEffect(() => {
-        console.log(" songs: ", songs);
+		console.log(" songs: ", songs);
+
+		return () => {
+			// called when component is gonna unmount			
+		}
     }, [songs]);
     
 	return (
