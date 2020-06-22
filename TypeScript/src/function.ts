@@ -90,3 +90,6 @@ declare function fn5(x: any): any;
 
 var myElem: HTMLDivElement;
 var x = fn(myElem); // x: string, :)
+
+
+// high order function 
