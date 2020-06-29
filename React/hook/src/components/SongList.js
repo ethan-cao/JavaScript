@@ -6,13 +6,14 @@ const SongList = () => {
 	const {songs, addSong} = useContext(SongContext)
 
     useEffect(() => {
-		console.log(" songs: ", songs);
+		console.log("[effect] songs: ", songs);
 
 		return () => {
 			// called when component is gonna unmount			
 		}
-    }, [songs]);
+    }, [songs]);  // if [], only invoked after 1st render
     
+	console.log("render");
 	return (
 		<div className="song-list">
 			<ul>

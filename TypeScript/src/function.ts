@@ -62,11 +62,11 @@ console.log(result) // s
 
 // function overload
 function checkType(obj: Array<any>): void;
-function checkType(obj: String): void;
-function checkType(obj: Array<any> | String): void {
+function checkType(obj: string): void;
+function checkType(obj: Array<any> | string): void {
     if (obj instanceof Array) {
         console.log("Array");
-    } else if (obj instanceof String) {
+    } else if (obj instanceof string) {
         console.log("String");
     }
 }
