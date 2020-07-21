@@ -1,6 +1,7 @@
 // https://youtu.be/sNyXE35liAE
 // https://codepen.io/ethan-cao/pen/mdVmJeR
 
+
 const { createStore } = Redux;
 
 const initialState = {
@@ -21,6 +22,8 @@ const reducer = (state = initialState, action) => {
 
 const store = createStore(reducer);
 
+// callback will be called when an action has been dispatched
+// just to notify an action was dispatched
 store.subscribe(() => {
     console.log("state updated");
     console.log(store.getState());
@@ -29,3 +32,4 @@ store.subscribe(() => {
 const todoAction = { type: "ADDED", payload: "new todo" };
 
 store.dispatch(todoAction); 
+// there is not a corresponding store.unsubscribe() method. Instead, store.subscribe() returns a function that you can call to cancel the subscription.
