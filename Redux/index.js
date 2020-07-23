@@ -18,6 +18,9 @@ const reducer = (state = initialState, action) => {
 
 
 const store = createStore(reducer);
+// createStore(reducer, preloadedState, enhancer)
+// createStore(reducer, enhancer)
+
 
 // callback will be called when an action has been dispatched
 // just to notify an action was dispatched
