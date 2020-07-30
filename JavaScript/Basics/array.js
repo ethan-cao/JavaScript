@@ -13,6 +13,7 @@ console.log(nums); 				// [ 1, 2, 3, 4, 5, 100 ]
 console.log(nums.toString());   // [ 1, 2, 3, 4, 5, 100 ]
 console.log(...nums);           // 1, 2, 3, 4, 5, 100
 console.log(nums["0"]);         // 1, access with index as string
+console.log(nums.reverse()); 				// [ 100, 5, 4, 3, 2, 1 ]
 
 nums.forEach(num => console.log(num));
 
