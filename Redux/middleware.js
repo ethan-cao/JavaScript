@@ -7,10 +7,8 @@ const { logger } = reduxLogger;
 const { thunk } = reduxThunk;
 
 const rootReducer = (state = {}, action) => {
-
     return state;
 }
-
 
 // enhancer applyMiddleware() injects functionality into dispatch by writing a function, that returns a function, that returns a function
 const store = createStore(rootReducer, applyMiddleware(logger, thunk))
