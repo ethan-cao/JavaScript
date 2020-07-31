@@ -1,10 +1,11 @@
 import redux from "redux";
 import reduxThunk from "redux-thunk";
-import axiosRequest from "axios";
+import axios from "axios";
+import reduxLogger from 'redux-logger'
 
 const { createStore, applyMiddleware } = redux;
-const { thunk } = reduxThunk;
-const { axios } = axiosRequest;
+const thunk = reduxThunk.default;
+const { logger } = reduxLogger;
 
 // redux-thunk: define async action creator,
 // it allows action creator to return a function rather than an action object
@@ -62,7 +63,6 @@ const fetchUsers = () => {
 };
 
 const reducer = (state = initialState, action) => {
-	console.log(action.type);
 	switch (action.type) {
 		case FETCH_USERS_REQUEST:
 			return {
@@ -84,6 +84,6 @@ const reducer = (state = initialState, action) => {
 	}
 };
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(logger, thunk));
 store.subscribe(() => console.log(store.getState()));
 store.dispatch(fetchUsers());

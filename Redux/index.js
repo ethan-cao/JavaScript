@@ -12,6 +12,7 @@ const reducer = (state = initialState, action) => {
         }
     }
 
+    // immutability rule: if we change it, we replace it.
     return { ...initialState };
 };
 

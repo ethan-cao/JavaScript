@@ -8,6 +8,7 @@
   "type": "module",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "redux": "4.0.5"
   }
 }
