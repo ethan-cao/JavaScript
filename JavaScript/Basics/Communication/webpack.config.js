@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './Async_Observable.js',
+    entry: './RxJS/operator.js',
     devtool: 'inline-source-map',
     module: {
       rules: [

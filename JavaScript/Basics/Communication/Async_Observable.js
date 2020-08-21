@@ -1,83 +1,57 @@
-/**
-http://reactivex.io/rxjs/manual/overview.html
-
-Observable is not part of JavaScript specification, it is defined in RxJS
-RxJS is the JS implementation of the ReactiveX project. 
-The ReactiveX project aims at providing an API for asynchronous programming 
-The fundamental paradigm of ReactiveX is observer pattern using observable. 
-
-e.g.
-const observable = new Observable(observer => observer.next(1));
-const subscription = observable.subscribe(x = > console.log(x));
-subscription.unsubscribe();
-*/
-
-// import is not part of JS, use webpack as transpiler
-// import {Observable} from 'rxjs';
-
-// use require() if debug using NodeJs,
-const { Observable } = require("rxjs");
+import { Observable } from 'rxjs';    // use require("rxjs"); in Node
 
 
-/**
- *   Observable represents an invokable collection of future values or events.
- */
-let observable = null;
-
-observable = Observable.create(observer => {observer.next(1);});
-
-// constructor take a subscribe function as parameter, subscribe function has a parameter observer
-// param subscribe represents an Observable execution, it starts execution only when an Observer subscribes to the Observable
-observable = new Observable(observer => {
-    observer.next(1);
+// Observable represents an invokable collection of future values.
+const observable = new Observable(function subscribe(observer) {
+// constructor take a subscribe() as parameter, which has a parameter observer
+    try{
+        // In an Observable Execution, multiple Next can be emitted
+        observer.next("next value 1");
+        observer.next("next value 2");
+        observer.next("next value 3");
+        // If either an Error or Complete notification is emitted, then nothing else can be delivered afterwards.
+        observer.complete();
+        observer.next("next value 4");  // not emitted
+    } catch (error) {
+        observer.error(error);
+    }
 
     // without returning unsubscribe(), subscription.unsubscribe() just cancels exexcution
     // With returning unsubscribe(), it makes possible to to cancel execution and dispose resource
-    return function unsubscribe() {};
+    return function unsubscribe() {
+        console.log("unsubscribed");
+    };
 });
+// At this point, observable is cold, or do not activate a producer, no Observable execution
 
 
-/**
- *  Observers is a set of callbacks(next, error, complete), that listens and handles values delivered by the Observable
- *  Observers is a consumer of values delivered by an Observable, 
- * 
- *  In an Observable Execution, multiple Next can be delivered. 
- *  If either an Error or Complete notification is delivered, then nothing else can be delivered afterwards.
- */
-const observer = {
-    next: x => console.log('Observer got a next value: ' + x),
-    error: err => console.error('Observer got an error: ' + err),
-    complete: () => console.log('Observer got a complete notification'),
-};
 
-
-/**
- *  use observable.subscribe(observer) to make Observer subscribes to the Observable
- * 
- *  observable.subscribe(observer) is invoked, subscribe() in Observable constructor is invoked for that particular observer
- *  Each call to observable.subscribe triggers its own independent setup for that given Observer  (unicast)
- * 
- *  Subscribing to an Observable is analogous to calling a Function.
- */
+// Observer is a set of callbacks(next, error, complete), a consumer of values emmited by an Observable
+// observable.subscribe(observer) let Observer subscribes to Observable
+// Observer is where you react(-ive programming) to Observeable, each future values
+// Subscribing to an Observable is like calling a function, providing callbacks where the data will be delivered to. (observer)
+// Observable constructor param subscribe() represents an Observable execution, it starts execution when an Observer subscribes to the Observable
+// each call to observable.subscribe(observer) creates a subscription, each subscription creates a new Obverable execution 
 const subscription = observable.subscribe(
-    x => console.log('Observer got a next value: ' + x),
-    err => console.error('Observer got an error: ' + err),
-    () => console.log('Observer got a complete notification')
+    (value) => console.log('value received from observer.next() : ', value),   // next
+    (error) => console.error('Observer got an error: ' + error),               // error
+    () => console.log('Observer got a complete notification')                  // complete             
 );
 
 
 
-/**
- *  observable.subscribe(observer) returns an Subscription object, represents the Observable execution ,
- *  use subscription.unsubscribe() to cancel the Observable execution or release resource
- */
+// use subscription.unsubscribe() to cancel the Observable execution or release resource
+// unsubscribe() returned by Observable constructor will be invoked 
 subscription.unsubscribe();
 
+// can create multilpe subscription on the same observable
 
 
 
 
 
+// 1 observable emits to 1 observer, unicast
+// 1 observable emits to many observers, multicasting
 
 
 

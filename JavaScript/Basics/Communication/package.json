@@ -11,10 +11,10 @@
     "rxjs": "^6.5.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development"
+    "start": "webpack-dev-server --mode development --port 8181"
   },
   "author": "",
   "license": "ISC"
