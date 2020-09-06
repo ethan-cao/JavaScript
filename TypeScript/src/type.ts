@@ -13,7 +13,7 @@ type Admin = {
 
 type Employee = {
     name: string;
-    readonly gender: boolean; // type alias can have readonly modeifer
+    readonly gender: boolean; // type alias can have readonly modifier
 }
 
 // Intersection type
