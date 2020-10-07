@@ -89,7 +89,7 @@ function curry(fx) {
 	return __curry(fx.length);
 }
 
-// simplied version
+// simplified version
 function curry(fx) {
 	if (fx.length === 0) return;
 

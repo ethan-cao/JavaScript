@@ -19,7 +19,7 @@ type Employee = {
 // Intersection type
 type ElevatedEmployee = Employee & Admin;
 
-// possible to do it with interface
+// Alternatively
 // interface Admin {}  
 // interface Employee {}
 // interface ElevatedEmployee extends Employee, Admin {}

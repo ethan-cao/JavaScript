@@ -32,7 +32,7 @@ console.log(obj);
 // var {a, x, sub:{number:N}, y=1, z} = obj; // y has default value, z is undefined
 // console.log("a : " + a + ", x : " + x + ", N: " + N +", y: " + y + ", z : "+ z);
 
-var {a: A, x: X, y:Y=1} = obj;  // renaming a to A, x to X, y to Y with default value 1
+var { a: A, x: X, y: Y = 1 } = obj;  // assign a to A, x to X, y to Y with default value 1
 console.log("A : " + A + ", X : " + X + ", Y: " + Y);
 
 
