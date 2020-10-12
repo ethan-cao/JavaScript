@@ -64,3 +64,17 @@ const p1: Human = new Man("Ethan", 29);
 const p2: Man = <Man> p1;
 const p3: Man = p1 as Man;
 const p4 = {name: "Ethan"} as Human;
+
+
+
+// interface for describing function
+interface F {
+    (a: number, b: number): number;
+    p1?: string;
+}
+
+const f1: F = (x: number, y: number) => x + y;
+
+console.log(f1(1, 2));
+console.log(f1.p1);
+

@@ -29,7 +29,9 @@ const e1: ElevatedEmployee = { name: "Max", gender: true, privileges: ["manage"]
 const XXX: "a" = "a";
 console.log(XXX)
 
-// type assertions, equivalent
+// type assertions, just tell TS complier that the variable is type
+// compiler does not not perform any checks to make sure the type assertion is actually valid
+
 // let v: any;
 // let s = v as string // ok in tsx and ts
 // let s2 = <string> v // only valid in ts

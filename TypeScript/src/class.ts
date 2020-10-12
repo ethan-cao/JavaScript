@@ -11,7 +11,7 @@ abstract class Organization {
 
 class Department extends Organization{
     // by default, filed is public, private property can only be accessed in class
-    // readonly: property shoudl not change after initialization 
+    // readonly: property should not change after initialization 
     private readonly id: string;
     protected employees: string[]; // also accessible from child class
     static location: string = "US";

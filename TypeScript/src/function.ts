@@ -66,7 +66,7 @@ function checkType(obj: string): void;
 function checkType(obj: Array<any> | string): void {
     if (obj instanceof Array) {
         console.log("Array");
-    } else if (obj instanceof string) {
+    } else {
         console.log("String");
     }
 }
