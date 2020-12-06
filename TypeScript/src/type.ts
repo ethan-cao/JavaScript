@@ -1,5 +1,5 @@
 // enum
-enum Role {
+const enum Role {
     ADMIN = 'ADMIN', 
     READ_ONLY = 100,  
     AUTHOR
@@ -36,3 +36,6 @@ console.log(XXX)
 // let s = v as string // ok in tsx and ts
 // let s2 = <string> v // only valid in ts
 
+
+// define a type alias for a function
+type TypeGuard<P, C extends P> = (obj: P) => obj is C;

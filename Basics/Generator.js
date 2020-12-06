@@ -1,24 +1,34 @@
 /**
-The function* declaration defines a generator function, which returns a generator object {value: value, done: true/false}
-A generator object is iterator and also iterable. 
-Generator fx can be exited and later re-entered. Their context (variable bindings) will be saved across re-entrances.
+Generator can achieve the same effect as async/await, writing async code in sync way
+generator can do more than async/await, async/await is more concise to make code in sync 
 
-Invoking generator fx does not execute its body immediately, an iterator object is returned instead. 
+function* defines a generator function, which returns a generator object {value: value, done: boolean}
+Invoking generator does not execute its body immediately, it just returns an iterator object.
 
-executing generator: When iterator's next() is called, the generator fx body is executed until 
-    the first yield expression finish
+A generator object is an iterator and it is also iterable. 
+
+generator is pausable function that can be exited and later re-entered. The call stack is persisted across re-entrances.
+generator has locally pause-able stack,
+    inside generator, yield stops the execution
+    outside generator, everything continues 
+
+use iterator.next() to continue generator execution til
+    the next first yield expression finish
     or with yield*, delegates to another generator function
 
 yield XXX; is called a "yield expression", when restart generator, a value back in will be the computed result of that yield ___ expression.
 
-pass value in  : paramater in next(), replace the pausing yield expression
+generator allows for a back-and-forth communication between generator and its caller
+pass value in  : paramter in next(), replace the pausing yield expression
 pass value out : yield expression
 
-A return statement in generator fx, when executed, will make the generator finished {done: true, value: value_after_return}
+when a generator reaches return statement, the generator is finished {done: true, value: returned_value}
+error thrown inside the generator will make the generator finished -- unless caught within the generator's body
+
 when used with for..of loops, the final returned value would be thrown away.
 
-Error thrown inside the generator will make the generator finished -- unless caught within the generator's body
 */
+
 
 function* generator1(x) {
     let y = 2 * x;

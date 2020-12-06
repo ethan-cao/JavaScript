@@ -69,8 +69,8 @@ const p4 = {name: "Ethan"} as Human;
 
 // interface for describing function
 interface F {
-    (a: number, b: number): number;
-    p1?: string;
+    (a: number, b: number): number;  // this is the function signature
+    p1?: string;     // property for the function
 }
 
 const f1: F = (x: number, y: number) => x + y;

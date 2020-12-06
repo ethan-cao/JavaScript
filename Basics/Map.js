@@ -28,3 +28,5 @@ s1 === s2 // false
  and weak reference to keys - if there is no other reference to the object key, 
  when the key gets garbage collected so do the values.
 */
+
+const map = new Map([[1, 2], [2, 4], [4, 8]]);

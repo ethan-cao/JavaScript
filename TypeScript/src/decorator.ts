@@ -21,7 +21,7 @@ function Log(msg: string) {
 		
 // Log0 is a decorator function, a class decorator
 // A Class Decorator is declared just before a class declaration. The class decorator is applied to class constructor
-// parameter: consturcotr, return: new constructor 
+// parameter: constructor, return: new constructor 
 function Log0(constructor: Function) {
 	console.log("Log0");
 }
