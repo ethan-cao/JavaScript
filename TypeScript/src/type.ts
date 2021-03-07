@@ -39,3 +39,7 @@ console.log(XXX)
 
 // define a type alias for a function
 type TypeGuard<P, C extends P> = (obj: P) => obj is C;
+
+interface I {
+
+}

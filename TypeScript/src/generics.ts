@@ -10,18 +10,18 @@ function merge<T1, T2> (obj1: T1, obj2: T2) {
 let mergedObj1 = merge<{name: string}, {age: number}>({name: "Ethan"}, {age:28});
 console.log("merged obj1: ", mergedObj1);
 
-// TS automatically infer T1 is type {name: stirng}, T2 is type {age: number}
+// TS automatically infer T1 is type {name: string}, T2 is type {age: number}
 let mergedObj2 = merge({name: "Ethan"}, {age:28});
 console.log("merged obj2: ", mergedObj2);
 
 
-const primise = new Promise<number>((resolve, reject)=>{
+const promise = new Promise<number>((resolve, reject)=>{
     setTimeout(()=>{
         resolve(100); // generic type only allows number
     }, 5000);
 });
 
-primise.then((data)=>{
+promise.then((data)=>{
     data.toFixed(2); // data is number
 });
 

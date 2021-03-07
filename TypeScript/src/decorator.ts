@@ -1,8 +1,6 @@
 /**
- * Decorator is just a function, it can be used with @ 
- * or a function can be used as a decorator
- * 
- * Decorator can be used with class, method, accessor, property or parameter.
+ * Decorator is just a function, called with @, apply metadata to the target, which can be
+ * class, method, accessor, property or parameter.
  * 
  * Decorator is executed when its target is defined
  */

@@ -20,3 +20,5 @@ console.log(Number.MIN_VALUE);  // float
 console.log(Number.MIN_SAFE_INTEGER); // integer 
 console.log(Number.MAX_VALUE);  // float 
 console.log(Number.MAX_SAFE_INTEGER); // integer 
+
+Math.min(1,2,3,-4);  // -4

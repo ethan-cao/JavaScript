@@ -1,32 +1,42 @@
 abstract class Organization {
     // 3 types of access modifiers: public, private and protected.
     // by default, class member (property, method) is public
-    taxId: string; 
+    taxId: string;
 
-    // a class that has an abstract method must be asbtract class
+    // accessible from child class
     protected name: string;
 
+    // a class that has an abstract method must be abstract class
     abstract describe(this: Organization): void;
 }
 
-class Department extends Organization{
+class Department extends Organization {
     // by default, filed is public, private property can only be accessed in class
-    // readonly: property should not change after initialization 
-    private readonly id: string;
-    protected employees: string[]; // also accessible from child class
-    static location: string = "US";
+    private readonly id: string;  // readonly: marks the entire object immutable
+    protected employees: string[];
+    static location: string = "US"; // default value
 
-    get departmentName() {
-        return this.name;
+    private revenue: number;
+    private cost: number;
+
+    private _profit: number;
+
+    // getter defines a ready-only property, that can be dynamically computed
+    // it cannot have paramter
+    get profit(): number {
+        this._profit = this.revenue - this.cost;
+        return this._profit;
     }
 
-    set departmentName(name: string){
-        this.name = name;
+    // setter defines write-only property, it requires backing property
+    // it must have 1 and only 1 param, it has no return type 
+    set profit(value: number) {
+        this._profit = value;   
     }
 
-    // property alias set in constructor param is also the class proerty
+    // property alias set in constructor param is also the class property
     // shorten way to initialize property
-    constructor(id: string, name: string, private alias: string){
+    constructor(id: string, name: string, private alias: string) {
         super();
 
         this.id = id;
@@ -34,16 +44,16 @@ class Department extends Organization{
     }
 
     // restrict this must be of type Department
-    describe(this: Department) {
+    describe(this: Department): void {
         console.log(`Department: ${this.name}`);
     }
 
-    addEmployee(employee: string) {
+    addEmployee(employee: string): void {
         this.employees.push(employee);
     }
 
-    // static methd
-    static sayWelcome(): void{
+    // static method
+    static sayWelcome(): void {
         console.log("welcome");
     }
 }
@@ -56,14 +66,14 @@ class ITDepartment extends Department {
     // private constructor
     private constructor(id: string, ...admins: [string]) {
         // super() must be invoked in the very beginning of child constructor
-        super(id, "IT", "IT Department"); 
+        super(id, "IT", "IT Department");
 
         this.admins = [...admins];
         this.employees = [...admins];
     }
 
     // single
-    static getInstance(){
+    static getInstance() {
         if (ITDepartment.instance === null) {
             ITDepartment.instance = new ITDepartment("1", "Ethan");
         }
@@ -73,5 +83,5 @@ class ITDepartment extends Department {
 }
 
 const it = ITDepartment.getInstance();
-it.departmentName = "new IT";   // setter
-console.log(it.departmentName); // getter
+it.profit= 200;   // setter, use it without ()
+console.log(it.profit); // getter, use it without ()

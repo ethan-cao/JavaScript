@@ -17,7 +17,7 @@ console.log(user.job?.employer?.name);
 
 // Nullish Coalescing
 const input = null;
-const output = input ?? "output";  // iff input is null or undefined, output is "output"
+const output = input ?? "output";  // iff the left operand is null or undefined, return "output", otherwise return input
 console.log(output)
 
 

@@ -4,7 +4,8 @@
 
 // interface has no implementation 
 interface Human {
-    // interface property cannot use public/private modifier, only possible with readonly
+    // interface member cannot use public/protected/private modifier
+    // can only use readonly
     readonly name: string;
     alias?: string; // optional property
     language: "English" // default value

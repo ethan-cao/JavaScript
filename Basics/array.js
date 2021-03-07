@@ -2,8 +2,8 @@
 const oneDimensionArray = new Array(128).fill(0);
 console.log(oneDimensionArray.length); // 128
 
-let twoDimensionDArray = Array(3).fill(0).map(x =>Array(3).fill(0));  // 10% slower than loop
-// let twoDimensionDArray = Array(3).fill(Array(3).fill(0));  // wrong: the inner array is shared 
+let twoDimensionDArray = new Array(3).fill(0).map(x => new Array(3).fill(0));  // 10% slower than loop
+// let twoDimensionDArray = new Array(3).fill(Array(3).fill(0));  // wrong: the inner array is shared 
 
 Array.isArray([]); // true
 
@@ -35,9 +35,10 @@ nums.unshift(0); //Add to the first index, nums = [0,1,2,3,4,5,100];
 nums.shift(); //remove value at the first index, nums = [1,2,3,4,5,100];
 
 nums.includes(2); // true
-nums.some(x => x >= 5); //true,      at least 1 element meets the condition
-nums.every((x) => x >= 5); // false, all element meets the condition
+nums.every(x => x >= 5); // false,  all element meets the condition
+nums.some(x => x >= 5); // true,    at least 1 element meets the condition
 
+nums.find(x => x >= 5); // 5, find the first one that satisfies condition
 nums.filter(x => x > 3); // [4,5]
 nums.map(x => x + 1); // [2,3,4,5,6]
 nums.reduce((a, b) => a + b, 5); // 20
@@ -61,7 +62,7 @@ var newArray = nums.slice();
 var newArray = [] = [...a];
 var newArray = nums.slice(0, 5); // copy the array from 0 til 4
 
-// tranform array-like or iterable into true array
+// transform array-like or iterable into true array
 var newArray = Array.from("char"); // ["c", "h", "a", "r"]
 // create array from every arguments
 var newArray = Array.of(1, 2, 3, 4, 5, 6); //  [1, 2, 3, 4, 5, 6]

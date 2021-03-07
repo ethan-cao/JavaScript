@@ -52,7 +52,8 @@ var twoSum1 = function(nums, target) {
 
 
 const result = twoSum([2, 7, 11, 15], 9);
-console.assert(result.length === 2, "wrong");
+console.assert(result.includes(2));
+console.assert(true, result.length === 2, "wrong");
 console.assert(result.includes(0), "wrong");
 console.assert(result.includes(1), "wrong");
 
