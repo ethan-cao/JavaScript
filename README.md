@@ -1,2 +1,2 @@
 # JavaScript
-Study note
+Study note.
