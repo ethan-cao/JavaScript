@@ -104,29 +104,3 @@ const c = await step1(b).catch(err => handle(err))
 
 // Promise.all() will reject as soon as one of the Promises in the array rejects.
 // Promise.allSettled() will never reject - it will resolve once all Promises in the array have either rejected or resolved.
-
-
-
-
-async function getData() {
-  // Simulating an asynchronous operation that takes some time
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('Data is ready!');
-    }, 2000);
-  });
-}
-
-async function fetchData() {
-  // call async with await, this pause the program execution until primose resolved
-  console.log('---Fetching data...');
-  const result1 = await getData();
-  console.log("result1: ", result1);  // Data is ready!
-
-  // call async without await, the program continuse execution without waiting promise getting resolved
-  console.log('---Fetching data again...');
-  const result2 = getData();
-  console.log("result2: ", result2);  // pending promise
-}
-
-fetchData();
