@@ -1,11 +1,11 @@
-enum People {
+enum PEOPLE1 {
   P1 = "jack",
   P2 = "tom"
 }
 
-console.log(People.P1);   // "jack"
-console.log(typeof People.P1);  // "string"
-console.log(People.P1 === "jack");  // true
+console.log(PEOPLE1.P1);   // "jack"
+console.log(typeof PEOPLE1.P1);  // "string"
+console.log(PEOPLE1.P1 === "jack");  // true
 
 
 // !!numeric!! enums members also get a reverse, mapping from enum values to enum names
@@ -15,3 +15,15 @@ enum Enum {
 
 let enumA = Enum.A;
 console.log(Enum[enumA]); // "A" string
+
+//-----------------------------------------------------
+// Better alternative
+// https://www.youtube.com/watch?v=jjMbPt_H3RQ&t=2s
+
+const PEOPLE = {
+  P1: 'jack',
+  P2: 'tom'
+} as const
+
+console.log(PEOPLE.P1);   // "jack"
+console.log(PEOPLE.P1 === "jack");  // true
