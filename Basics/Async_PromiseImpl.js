@@ -10,24 +10,24 @@ class PromiseImpl {
   #onRejectCallbacks = []
 
   constructor (executor) {
-    const resolve = value => {
+    const resolve = (value) => {
       if (this.#status !== STATE_PENDING) {
         return
       }
 
       this.#status = STATE_RESOLVED
       this.#value = value
-      this.#onResolveCallbacks.forEach(callback => callback(this.#value))
+      this.#onResolveCallbacks.forEach((callback) => callback(this.#value))
     }
 
-    const reject = error => {
+    const reject = (error) => {
       if (this.#status !== STATE_PENDING) {
         return
       }
 
       this.#status = STATE_REJECTED
       this.#value = error
-      this.#onRejectCallbacks.forEach(callback => callback(this.#value))
+      this.#onRejectCallbacks.forEach((callback) => callback(this.#value))
     }
 
     try {

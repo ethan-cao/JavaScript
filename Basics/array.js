@@ -50,7 +50,7 @@ const [a, , b = 10, rest] = [1, 2, 3, 4, 5] // a = 1, b = 3, rest = 4
 nums.splice(i, 1) // // remove an element at index i, nums: [ 1, 3, 4, 5, 100 ]
 nums.splice(0, 0, -1, 0) // nums : [-1,0,1,2,3,4,5,100]
 nums.splice(0, 2) // nums: [1,2,3,4,5,100]
-nums.splice(-1) // remove the last element, change the exising array
+nums.splice(-1) // remove the last element, change the existing array
 
 // remove an element from array: get its index then splice
 
@@ -77,7 +77,7 @@ a.push(...b)
 a = 5
 let b = 6
 
-;[a, b] = [b, a]
+  ;[a, b] = [b, a]
 const swap = (nums, a, b) => {
   ;[nums[a], nums[b]] = [nums[b], nums[a]]
 }

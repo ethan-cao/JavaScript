@@ -14,24 +14,23 @@ promise help to avoid nested callbacks
 
 /*  Promise constructor takes 1 parameter, an executor function 
 
-    Executor function works asynchronously, it takes 2 parameters resolve() and reject()
+    executor function works asynchronously, it takes 2 parameters resolve() and reject()
+    executor is invoked only once when the promise constructor is invoked
+    wrap executor in functions if it needs to be invoked later 
+
     the first time, resolve/reject is invoked, the invocation determines the status of the promise
-    executor is invoked only once
-
     resolve and reject() handle the success and failure case, respectively
-
-    executor is invoked eagerly. meaning a promise starts working once the promise constructor is invoked 
-    wrap executor in functions if needed to be invoked later 
-    
     If an error is thrown in the executor function, the promise is rejected. 
     and the return value of the executor is ignored  
 */
 const promise = new Promise((resolve, reject) => {
+  console.log('executor called')  
+
   if (Math.random() * 100 < 90) {
     resolve('90%')
+  } else {
+    reject('10%')
   }
-
-  reject('10%')
   // even if resolve() is called, reject() is still get called
   // but since the promise is already settled, subsequent reject call does not change the promise status
 })
@@ -48,8 +47,8 @@ Promise does not expose its status,
 
 
 
-then() runs after a promise has been resolved(resolved or rejected) 
-resolve()/reject() are callback function for success/failure cases, invoked asynchronously
+then() runs asynchronously, after a promise has been resolved(resolved or rejected) 
+resolve()/reject() are callback function for success/failure cases
 
 then() returns a new Promise represents the completion of either resolve() or reject()
 if resolve/reject 

@@ -18,7 +18,7 @@ console.log(Enum[enumA]); // "A" string
 
 //-----------------------------------------------------
 // Better alternative
-// https://www.youtube.com/watch?v=jjMbPt_H3RQ&t=2s
+// https://youtu.be/jjMbPt_H3RQ?t=313
 
 const PEOPLE = {
   P1: 'jack',

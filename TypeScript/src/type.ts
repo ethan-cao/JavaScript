@@ -1,10 +1,3 @@
-// enum
-const enum Role {
-    ADMIN = 'ADMIN', 
-    READ_ONLY = 100,  
-    AUTHOR
-}
-
 // type alias
 type Admin = {
     name: string;
@@ -16,7 +9,7 @@ type Employee = {
     readonly gender: boolean; // type alias can have readonly modifier
 }
 
-// Intersection type
+// Intersection type: The resulting type includes all the properties from Employee and Admin
 type ElevatedEmployee = Employee & Admin;
 
 // Alternatively
@@ -24,7 +17,7 @@ type ElevatedEmployee = Employee & Admin;
 // interface Employee {}
 // interface ElevatedEmployee extends Employee, Admin {}
 
-const e1: ElevatedEmployee = { name: "Max", gender: true, privileges: ["manage"]}; 
+const e1: ElevatedEmployee = { name: "Max", gender: true, privileges: ["manage"] };
 
 const XXX: "a" = "a";
 console.log(XXX)
@@ -39,7 +32,3 @@ console.log(XXX)
 
 // define a type alias for a function
 type TypeGuard<P, C extends P> = (obj: P) => obj is C;
-
-interface I {
-
-}

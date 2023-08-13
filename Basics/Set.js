@@ -2,14 +2,14 @@
 let set = new Set();
 
 set.add("one")
-   .add("two")
-   .add("one");
+    .add("two")
+    .add("one");
 
 console.log(set.size);  // 2
 
 console.log(set.has("two")); // true
 
-for (let key of set.values()) {
+for (const key of set.values()) {
     console.log(key); // insertion order. ["one", "two"]
 }
 
